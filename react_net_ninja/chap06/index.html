@@ -18,42 +18,37 @@ class App extends React.Component {
     this.state = {
       name: 'Agus Richard',
       age: 22,
-      num: 0
-    }
-    this.handleClick = this.handleClick.bind(this);
+      status: ''
+    };
   }
-  
-  // With function declaration
-  handleClick() {
-    this.setState(prevState => {
-      return {
-        num: prevState.num + 1
-      }
-    })
-    console.log('Click')
-  }
-  
-  // With arrow function
-  handleMouseOver = () => {
-    this.setState(prevState => {
-      return {
-        num: prevState.num + 1
-      }
+
+  handleChange = (event) => {
+    this.setState({
+      name: event.target.value
     });
-    console.log('Mouse over');
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.setState({
+      status: 'The form has been submitted ' + this.state.name
+    });
   }
 
   render() {
     return (
       <div>
-        <h1>Welcome!!!</h1>
-        <p>{ this.state.num }</p>
-        <button onClick={ this.handleClick }>Click me!</button>
-        <button onMouseOver={ this.handleMouseOver }>Hover me!</button>
+        <h1>Welcome!!! { this.state.name }</h1>
+        <form action="" onSubmit={ this.handleSubmit }>
+          <input type="text" onChange={ this.handleChange }/>
+          <button>Submit</button>
+        </form>
+        <h3>{ this.state.status }</h3>
       </div>
     );
   }
 }
+
 
 ReactDOM.render(<App />, document.getElementById('app'));
 </script>
