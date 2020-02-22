@@ -50,7 +50,19 @@ class App extends React.Component {
       users: newUsersList
     })
   }
+
+  componentDidMount() {
+    console.log('Mounted');
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('Updated');
+    console.log(prevProps, prevState);
+  }
+
   render() {
+    console.log('Rendered');
+
     const usersList = this.state.users.map(user => {
       return <Bio key={ user.id } user={ user } deleteUser={ this.deleteUser }/>
     });
@@ -59,8 +71,10 @@ class App extends React.Component {
       <div>
         <h1>Welcome!!!</h1>
         <AddUser addUser={ this.addUser } />
-        <h3>List of Users:</h3>
-        { usersList }
+        <div className="list-of-users">
+          <h3>List of Users:</h3>
+          { usersList }
+        </div>
       </div>  
     )
   }
