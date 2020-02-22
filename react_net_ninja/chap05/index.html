@@ -1,0 +1,63 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <title>Learn React</title>
+</head>
+<body>
+<div id="app"></div>
+
+
+<script type="text/babel">
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'Agus Richard',
+      age: 22,
+      num: 0
+    }
+    this.handleClick = this.handleClick.bind(this);
+  }
+  
+  // With function declaration
+  handleClick() {
+    this.setState(prevState => {
+      return {
+        num: prevState.num + 1
+      }
+    })
+    console.log('Click')
+  }
+  
+  // With arrow function
+  handleMouseOver = () => {
+    this.setState(prevState => {
+      return {
+        num: prevState.num + 1
+      }
+    });
+    console.log('Mouse over');
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Welcome!!!</h1>
+        <p>{ this.state.num }</p>
+        <button onClick={ this.handleClick }>Click me!</button>
+        <button onMouseOver={ this.handleMouseOver }>Hover me!</button>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById('app'));
+</script>
+
+
+</body>
+</html>
