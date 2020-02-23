@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Pokeball from '../pokeball.png';
+import { deletePost } from '../actions/postActions';
 
 class Post extends React.Component {
 
@@ -37,7 +38,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    deletePost: (postId) => dispatch({ type: 'DELETE_POST', postId })
+    deletePost: (postId) => dispatch(deletePost(postId))
   }
 }
 
