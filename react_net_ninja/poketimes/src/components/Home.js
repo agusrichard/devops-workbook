@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Pokeball from '../pokeball.png';
 
 class Home extends React.Component {
-
+  
   render() {
     const { posts } = this.props;
     let postsList = [];

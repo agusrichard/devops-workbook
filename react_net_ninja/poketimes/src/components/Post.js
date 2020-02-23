@@ -3,6 +3,13 @@ import { connect } from 'react-redux';
 import Pokeball from '../pokeball.png';
 
 class Post extends React.Component {
+
+  handleClick = () => {
+    const postId = this.props.post.id;
+    this.props.deletePost(postId)
+    this.props.history.push('/');
+  }
+
   render() {
     const post = this.props.post;
 
@@ -13,6 +20,7 @@ class Post extends React.Component {
             <img src={ Pokeball } alt="A Pokeball"/>
             <span className="card-title red-text">{ post.title }</span>
             <p className="card-body black-text">{ post.body }</p>
+            <button className="btn gray" onClick={ this.handleClick }>Delete Post</button>
           </div>
         </div>
       </div>
@@ -27,4 +35,10 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps)(Post);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deletePost: (postId) => dispatch({ type: 'DELETE_POST', postId })
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post);
