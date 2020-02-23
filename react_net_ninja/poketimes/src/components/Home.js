@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import Rainbow from '../hoc/Rainbow';
 
 class Home extends React.Component {
@@ -23,10 +24,12 @@ class Home extends React.Component {
       postsList = posts.map(post => {
         return (
           <div className="post card" key={ post.id }>
-            <div className="card-content">
-              <span className="card-title">{ post.title }</span>
-              <p className="card-body">{ post.body }</p>
-            </div>
+            <Link to={ '/' + post.id }>
+              <div className="card-content">
+                <span className="card-title">{ post.title }</span>
+                <p className="card-body">{ post.body }</p>
+              </div>
+            </Link>
           </div>
         );
       });
