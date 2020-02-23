@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Pokeball from '../pokeball.png';
 
 class Post extends React.Component {
   state = {
@@ -22,26 +23,33 @@ class Post extends React.Component {
       let { post } = this.state;
 
       return (
-        <div className="post card">
-          <div className="card-content">
-            <span className="card-title">{ post.title }</span>
-            <p className="card-body">{ post.body }</p>
+        <div className="container">
+          <div className="post card">
+            <div className="card-content">
+              <img src={ Pokeball } alt="A Pokeball Image"/>
+              <span className="card-title red-text">{ post.title }</span>
+              <p className="card-body black-text">{ post.body }</p>
+            </div>
           </div>
         </div>
       );
     } else if (!this.state.post) {
       return (
-        <div className="post card">
-          <div className="card-content">
-            <span className="card-title">Loading...</span>
+        <div className="container">
+          <div className="post card">
+            <div className="card-content">
+              <span className="card-title">Loading...</span>
+            </div>
           </div>
         </div>
       );
     } else {
       return (
-        <div className="post card">
-          <div className="card-content">
-            <span className="card-title">{ this.state.msg }</span>
+        <div className="container">
+          <div className="post card">
+            <div className="card-content">
+              <span className="card-title">{ this.state.msg }</span>
+            </div>
           </div>
         </div>
       );

@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Rainbow from '../hoc/Rainbow';
+import Pokeball from '../pokeball.png';
 
 class Home extends React.Component {
   state = {
@@ -26,8 +27,9 @@ class Home extends React.Component {
           <div className="post card" key={ post.id }>
             <Link to={ '/' + post.id }>
               <div className="card-content">
-                <span className="card-title">{ post.title }</span>
-                <p className="card-body">{ post.body }</p>
+                <img src={ Pokeball } alt="A Pokeball Image"/>
+                <span className="card-title red-text">{ post.title }</span>
+                <p className="card-body black-text">{ post.body }</p>
               </div>
             </Link>
           </div>
