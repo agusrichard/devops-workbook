@@ -1,4 +1,5 @@
 import React from 'react';
+import Rainbow from '../hoc/Rainbow';
 
 function Home() {
   return (
@@ -14,4 +15,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Rainbow(Home);
