@@ -27,8 +27,9 @@ func Register(c *gin.Context) {
 // Login router function
 func Login(c *gin.Context) {
 	if c.Request.Method == "POST" {
-		var user models.User
-		c.BindJSON(&user)
+		var loginUser models.User
+		c.BindJSON(&loginUser)
+		var user models.User = repository.GetUserByUsername(loginUser.Username)
 		c.JSON(200, gin.H{
 			"message": "Login Success",
 			"data": gin.H{

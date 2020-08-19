@@ -15,7 +15,7 @@ func main() {
 
 	// Router for authentication
 	r.POST("/auth/register", router.Register)
-	r.GET("/auth/login", router.Login)
+	r.POST("/auth/login", router.Login)
 
 	r.Run()
 }
