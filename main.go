@@ -1,35 +1,21 @@
 package main
 
 import (
-	"database/sql"
-	"fmt"
+	"golang-restapi/repository"
+	"golang-restapi/router"
 
-	_ "github.com/lib/pq"
-)
-
-const (
-	host     = "localhost"
-	port     = 5432
-	user     = "postgres"
-	password = "postgres"
-	dbname   = "postgres"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
-		"password=%s dbname=%s sslmode=disable",
-		host, port, user, password, dbname)
+	r := gin.Default()
 
-	db, err := sql.Open("postgres", psqlInfo)
-	if err != nil {
-		panic(err)
-	}
-	defer db.Close()
+	// Initialize database connection
+	repository.InitDb()
 
-	err = db.Ping()
-	if err != nil {
-		panic(err)
-	}
+	// Router for authentication
+	r.POST("/auth/register", router.Register)
+	r.GET("/auth/login", router.Login)
 
-	fmt.Println("Successfully connected!")
+	r.Run()
 }
