@@ -2,6 +2,7 @@ package router
 
 import (
 	"golang-restapi/models"
+	"golang-restapi/repository"
 
 	"github.com/gin-gonic/gin"
 )
@@ -11,6 +12,7 @@ func Register(c *gin.Context) {
 	if c.Request.Method == "POST" {
 		var user models.User
 		c.BindJSON(&user)
+		repository.CreateUser(&user)
 		c.JSON(200, gin.H{
 			"message": "Register Success",
 			"data": gin.H{
