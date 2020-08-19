@@ -22,7 +22,7 @@ func CreateUser(user *models.User) {
 // GetUserByUsername -- Get user by username
 func GetUserByUsername(username string) models.User {
 	sqlQuery := `
-		SELECT * FROM users
+		SELECT _id, username, password FROM users
 		WHERE username = $1
 	`
 	rows, err := DB.Query(sqlQuery, username)
@@ -33,6 +33,7 @@ func GetUserByUsername(username string) models.User {
 	var user models.User
 	for rows.Next() {
 		err = rows.Scan(
+			&user.ID,
 			&user.Username,
 			&user.Password,
 		)

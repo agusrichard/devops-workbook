@@ -1,7 +1,6 @@
 package router
 
 import (
-	"fmt"
 	"golang-restapi/models"
 	"golang-restapi/repository"
 	"golang-restapi/utils"
@@ -16,7 +15,6 @@ func Register(c *gin.Context) {
 		c.BindJSON(&user)
 		var err error
 		user.Password, err = utils.HashPassword(user.Password)
-		fmt.Printf("User password %v", user.Password)
 		if err != nil {
 			panic(err)
 		}
@@ -24,6 +22,7 @@ func Register(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "Register Success",
 			"data": gin.H{
+				"_id":      user.ID,
 				"username": user.Username,
 				"password": user.Password,
 			},
@@ -39,11 +38,18 @@ func Login(c *gin.Context) {
 		c.BindJSON(&loginUser)
 		var user models.User = repository.GetUserByUsername(loginUser.Username)
 		if utils.CheckPasswordHash(loginUser.Password, user.Password) {
+			token, err := utils.CreateToken(user.ID)
+			if err != nil {
+				panic(err)
+			}
 			c.JSON(200, gin.H{
 				"message": "Login Success",
 				"data": gin.H{
-					"username": user.Username,
-					"password": user.Password,
+					"user": gin.H{
+						"username": user.Username,
+						"password": user.Password,
+					},
+					"token": token,
 				},
 			})
 		} else {
