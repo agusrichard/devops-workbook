@@ -22,10 +22,10 @@ func main() {
 	}
 
 	// Routes for other
-	otherRoute := r.Group("/other")
-	otherRoute.Use(middleware.AuthMiddleware())
+	userRoute := r.Group("/user")
+	userRoute.Use(middleware.AuthMiddleware())
 	{
-		otherRoute.GET("/", router.HandleOther)
+		userRoute.GET("/", router.GetUserData)
 	}
 
 	r.Run()

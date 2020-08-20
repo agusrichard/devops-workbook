@@ -47,3 +47,32 @@ func GetUserByUsername(username string) models.User {
 	}
 	return user
 }
+
+// GetUserByID -- Get user data
+func GetUserByID(userID uint64) models.User {
+	sqlQuery := `
+		SELECT _id, username, password FROM users
+		WHERE _id = $1
+	`
+	rows, err := DB.Query(sqlQuery, userID)
+	if err != nil {
+		panic(err)
+	}
+	defer rows.Close()
+	var user models.User
+	for rows.Next() {
+		err = rows.Scan(
+			&user.ID,
+			&user.Username,
+			&user.Password,
+		)
+		if err != nil {
+			panic(err)
+		}
+	}
+	err = rows.Err()
+	if err != nil {
+		panic(err)
+	}
+	return user
+}
