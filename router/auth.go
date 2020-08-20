@@ -22,7 +22,6 @@ func Register(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "Register Success",
 			"data": gin.H{
-				"_id":      user.ID,
 				"username": user.Username,
 				"password": user.Password,
 			},
@@ -46,6 +45,7 @@ func Login(c *gin.Context) {
 				"message": "Login Success",
 				"data": gin.H{
 					"user": gin.H{
+						"_id":      user.ID,
 						"username": user.Username,
 						"password": user.Password,
 					},

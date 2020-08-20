@@ -1,6 +1,7 @@
 package main
 
 import (
+	"golang-restapi/middleware"
 	"golang-restapi/repository"
 	"golang-restapi/router"
 
@@ -13,9 +14,19 @@ func main() {
 	// Initialize database connection
 	repository.InitDb()
 
-	// Router for authentication
-	r.POST("/auth/register", router.Register)
-	r.POST("/auth/login", router.Login)
+	// Routes for authentication
+	authRoute := r.Group("/auth")
+	{
+		authRoute.POST("/register", router.Register)
+		authRoute.POST("/login", router.Login)
+	}
+
+	// Routes for other
+	otherRoute := r.Group("/other")
+	otherRoute.Use(middleware.AuthMiddleware())
+	{
+		otherRoute.GET("/", router.HandleOther)
+	}
 
 	r.Run()
 }
