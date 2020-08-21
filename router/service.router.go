@@ -2,6 +2,7 @@ package router
 
 import (
 	"golang-restapi/model"
+	"golang-restapi/repository"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -11,6 +12,7 @@ import (
 func CreateServiceRequest(c *gin.Context) {
 	var serviceRequest model.Service
 	c.Bind(&serviceRequest)
+	repository.CreateServiceRequest(&serviceRequest)
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Success to create service request",
 		"data": gin.H{
