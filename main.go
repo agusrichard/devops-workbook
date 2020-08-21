@@ -33,6 +33,7 @@ func main() {
 	serviceRoute.Use(middleware.AuthMiddleware())
 	{
 		serviceRoute.POST("/", router.CreateServiceRequest)
+		serviceRoute.GET("/", router.GetServices)
 	}
 
 	r.Run()

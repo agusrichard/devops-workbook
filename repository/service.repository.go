@@ -6,7 +6,7 @@ import (
 )
 
 // CreateServiceRequest -- create service request
-func CreateServiceRequest(service *model.Service) {
+func CreateServiceRequest(service *model.Service, userID uint64) {
 	sqlQuery := `
 		INSERT INTO services (
 			request_id, 
@@ -16,9 +16,10 @@ func CreateServiceRequest(service *model.Service) {
 			data_agent,
 			cargo,
 			etd,
-			eta
+			eta,
+			user_id
 		)
-		VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);
 	`
 
 	_, err := DB.Exec(sqlQuery,
@@ -30,9 +31,50 @@ func CreateServiceRequest(service *model.Service) {
 		service.Cargo,
 		service.ETD,
 		service.ETA,
+		userID,
 	)
 	if err != nil {
 		panic(err)
 	}
 	fmt.Printf("Success to create service request %v\n", *service)
+}
+
+// GetServices -- Get all services by a user
+func GetServices(userID uint64) []model.Service {
+	sqlQuery := `
+		SELECT * FROM services
+		WHERE user_id = $1;
+		
+	`
+	rows, err := DB.Query(sqlQuery, userID)
+	if err != nil {
+		panic(err)
+	}
+	defer rows.Close()
+	var result []model.Service
+	for rows.Next() {
+		var service = model.Service{}
+		err = rows.Scan(
+			&service.ID,
+			&service.RequestID,
+			&service.Status,
+			&service.VesselName,
+			&service.ServiceType,
+			&service.DataAgent,
+			&service.Cargo,
+			&service.ETD,
+			&service.ETA,
+			&service.UserID,
+		)
+		if err != nil {
+			panic(err)
+		}
+		result = append(result, service)
+	}
+	err = rows.Err()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("GetServices result", result)
+	return result
 }

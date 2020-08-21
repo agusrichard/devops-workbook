@@ -11,9 +11,9 @@ import (
 
 // GetUserData -- Retrieve user data
 func GetUserData(c *gin.Context) {
-	userID := c.MustGet("userID").(float64)
+	userID := uint64(c.MustGet("userID").(float64))
 	fmt.Println("GetUserData userID", userID)
-	var user model.User = repository.GetUserByID(uint64(userID))
+	var user model.User = repository.GetUserByID(userID)
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Nice to see you bruh!",
 		"data": gin.H{

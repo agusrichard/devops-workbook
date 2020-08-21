@@ -9,7 +9,7 @@ import (
 func CreateUser(user *model.User) {
 	sqlQuery := `
 		INSERT INTO users (username, password) 
-		VALUES ($1, $2)
+		VALUES ($1, $2);
 	`
 
 	_, err := DB.Exec(sqlQuery, user.Username, user.Password)
@@ -23,7 +23,7 @@ func CreateUser(user *model.User) {
 func GetUserByUsername(username string) model.User {
 	sqlQuery := `
 		SELECT _id, username, password FROM users
-		WHERE username = $1
+		WHERE username = $1;
 	`
 	rows, err := DB.Query(sqlQuery, username)
 	if err != nil {
