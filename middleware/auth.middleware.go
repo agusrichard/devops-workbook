@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"fmt"
 	"net/http"
 	"os"
 	"strings"
@@ -39,20 +38,12 @@ func validateToken(c *gin.Context) {
 
 func getPayload(tokenString string) (interface{}, error) {
 	claims := jwt.MapClaims{}
-	token, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
+	_, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
 		return []byte(os.Getenv("SECRET_KEY")), nil
 	})
-	fmt.Println(token)
 	if err != nil {
 		// panic(err)
 		return nil, err
 	}
-
-	// do something with decoded claims
-	fmt.Println("claims", claims)
-	for key, val := range claims {
-		fmt.Printf("Key: %v, value: %v\n", key, val)
-	}
-	fmt.Println("payload claims user_id", claims["user_id"])
 	return claims["user_id"], nil
 }

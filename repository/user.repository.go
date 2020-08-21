@@ -6,7 +6,7 @@ import (
 )
 
 // CreateUser -- Create user
-func CreateUser(user *model.User) {
+func CreateUser(user *model.User) bool {
 	sqlQuery := `
 		INSERT INTO users (username, password) 
 		VALUES ($1, $2);
@@ -14,20 +14,21 @@ func CreateUser(user *model.User) {
 
 	_, err := DB.Exec(sqlQuery, user.Username, user.Password)
 	if err != nil {
-		panic(err)
+		return false
 	}
 	fmt.Printf("Success to create user %v\n", *user)
+	return true
 }
 
 // GetUserByUsername -- Get user by username
-func GetUserByUsername(username string) model.User {
+func GetUserByUsername(username string) (model.User, error) {
 	sqlQuery := `
 		SELECT _id, username, password FROM users
 		WHERE username = $1;
 	`
 	rows, err := DB.Query(sqlQuery, username)
 	if err != nil {
-		panic(err)
+		return model.User{}, err
 	}
 	defer rows.Close()
 	var user model.User
@@ -38,25 +39,25 @@ func GetUserByUsername(username string) model.User {
 			&user.Password,
 		)
 		if err != nil {
-			panic(err)
+			return model.User{}, err
 		}
 	}
 	err = rows.Err()
 	if err != nil {
-		panic(err)
+		return model.User{}, err
 	}
-	return user
+	return user, nil
 }
 
 // GetUserByID -- Get user data
-func GetUserByID(userID uint64) model.User {
+func GetUserByID(userID uint64) (model.User, error) {
 	sqlQuery := `
 		SELECT _id, username, password FROM users
 		WHERE _id = $1
 	`
 	rows, err := DB.Query(sqlQuery, userID)
 	if err != nil {
-		panic(err)
+		return model.User{}, err
 	}
 	defer rows.Close()
 	var user model.User
@@ -67,12 +68,12 @@ func GetUserByID(userID uint64) model.User {
 			&user.Password,
 		)
 		if err != nil {
-			panic(err)
+			return model.User{}, err
 		}
 	}
 	err = rows.Err()
 	if err != nil {
-		panic(err)
+		return model.User{}, err
 	}
-	return user
+	return user, nil
 }
