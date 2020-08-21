@@ -1,12 +1,25 @@
 package router
 
 import (
+	"fmt"
+	"golang-restapi/model"
+	"golang-restapi/repository"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 )
 
 // GetUserData -- Retrieve user data
 func GetUserData(c *gin.Context) {
-	c.JSON(200, gin.H{
-		"message": "GetUserData route",
+	userID := c.MustGet("userID").(float64)
+	fmt.Println("GetUserData userID", userID)
+	var user model.User = repository.GetUserByID(uint64(userID))
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Nice to see you bruh!",
+		"data": gin.H{
+			"_id":      user.ID,
+			"username": user.Username,
+			"password": user.Password,
+		},
 	})
 }

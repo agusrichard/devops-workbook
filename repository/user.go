@@ -2,11 +2,11 @@ package repository
 
 import (
 	"fmt"
-	"golang-restapi/models"
+	"golang-restapi/model"
 )
 
 // CreateUser -- Create user
-func CreateUser(user *models.User) {
+func CreateUser(user *model.User) {
 	sqlQuery := `
 		INSERT INTO users (username, password) 
 		VALUES ($1, $2)
@@ -20,7 +20,7 @@ func CreateUser(user *models.User) {
 }
 
 // GetUserByUsername -- Get user by username
-func GetUserByUsername(username string) models.User {
+func GetUserByUsername(username string) model.User {
 	sqlQuery := `
 		SELECT _id, username, password FROM users
 		WHERE username = $1
@@ -30,7 +30,7 @@ func GetUserByUsername(username string) models.User {
 		panic(err)
 	}
 	defer rows.Close()
-	var user models.User
+	var user model.User
 	for rows.Next() {
 		err = rows.Scan(
 			&user.ID,
@@ -49,7 +49,7 @@ func GetUserByUsername(username string) models.User {
 }
 
 // GetUserByID -- Get user data
-func GetUserByID(userID uint64) models.User {
+func GetUserByID(userID uint64) model.User {
 	sqlQuery := `
 		SELECT _id, username, password FROM users
 		WHERE _id = $1
@@ -59,7 +59,7 @@ func GetUserByID(userID uint64) models.User {
 		panic(err)
 	}
 	defer rows.Close()
-	var user models.User
+	var user model.User
 	for rows.Next() {
 		err = rows.Scan(
 			&user.ID,

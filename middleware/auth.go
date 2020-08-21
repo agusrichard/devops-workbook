@@ -26,7 +26,13 @@ func validateToken(c *gin.Context) {
 		})
 	} else {
 		token = strings.Split(token, "Bearer ")[1]
-		getPayload(token)
+		userID, err := getPayload(token)
+		if err != nil {
+			c.AbortWithStatusJSON(http.StatusForbidden, gin.H{
+				"message": "You shall not pass!",
+			})
+		}
+		c.Set("userID", userID)
 		c.Next()
 	}
 }
@@ -38,8 +44,8 @@ func getPayload(tokenString string) (interface{}, error) {
 	})
 	fmt.Println(token)
 	if err != nil {
-		panic(err)
-		// return nil, err
+		// panic(err)
+		return nil, err
 	}
 
 	// do something with decoded claims
@@ -47,5 +53,6 @@ func getPayload(tokenString string) (interface{}, error) {
 	for key, val := range claims {
 		fmt.Printf("Key: %v, value: %v\n", key, val)
 	}
-	return nil, nil
+	fmt.Println("payload claims user_id", claims["user_id"])
+	return claims["user_id"], nil
 }
