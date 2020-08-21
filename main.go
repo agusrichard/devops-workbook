@@ -21,11 +21,18 @@ func main() {
 		authRoute.POST("/login", router.Login)
 	}
 
-	// Routes for other
+	// Routes for User
 	userRoute := r.Group("/user")
 	userRoute.Use(middleware.AuthMiddleware())
 	{
 		userRoute.GET("/", router.GetUserData)
+	}
+
+	// Routes for Service
+	serviceRoute := r.Group("/service")
+	serviceRoute.Use(middleware.AuthMiddleware())
+	{
+		serviceRoute.POST("/", router.CreateServiceRequest)
 	}
 
 	r.Run()
