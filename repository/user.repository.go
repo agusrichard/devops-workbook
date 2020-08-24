@@ -96,3 +96,33 @@ func ConfirmAccount(userID uint64) (bool, error) {
 	}
 	return true, nil
 }
+
+// NewUUID --
+func NewUUID(uuid, email string) (bool, error) {
+	sqlQuery := `
+		UPDATE users
+		SET uuid=$1
+		WHERE email=$2
+	`
+
+	_, err := config.DB.Query(sqlQuery, uuid, email)
+	if err != nil {
+		return false, err
+	}
+	return true, nil
+}
+
+// ChangePassword -- Forgot Password
+func ChangePassword(email string, newPassword string) (bool, error) {
+	sqlQuery := `
+		UPDATE users
+		SET password=$1
+		WHERE email=$2
+	`
+
+	_, err := config.DB.Query(sqlQuery, newPassword, email)
+	if err != nil {
+		return false, err
+	}
+	return true, nil
+}

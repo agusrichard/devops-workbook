@@ -34,3 +34,10 @@ func ResponseServerError(c *gin.Context) {
 		"message": "Internal Server Error",
 	})
 }
+
+// ResponseNotFound ...
+func ResponseNotFound(c *gin.Context, message string) {
+	c.AbortWithStatusJSON(http.StatusNotFound, gin.H{
+		"message": message,
+	})
+}

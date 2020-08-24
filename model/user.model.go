@@ -21,3 +21,15 @@ type LoginData struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
+
+// RequestPasswordData -- Used in RequestPassword
+type RequestPasswordData struct {
+	Email string `json:"email"`
+}
+
+// ForgotPasswordData --- Used in ForgotPassword handler
+type ForgotPasswordData struct {
+	Email       string `json:"email"`
+	UUID        string `json:"uuid"`
+	NewPassword string `json:"newPassword"`
+}

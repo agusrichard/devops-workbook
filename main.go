@@ -26,6 +26,8 @@ func main() {
 		authRoute.POST("/register", handler.Register)
 		authRoute.POST("/login", handler.Login)
 		authRoute.POST("/confirm", handler.ConfirmAccount)
+		authRoute.POST("/forgot-password", handler.RequestPassword)
+		authRoute.POST("/forgot-password/confirm", handler.ChangePassword)
 	}
 
 	// Routes for User

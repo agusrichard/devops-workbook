@@ -87,7 +87,7 @@ func ConfirmAccount(c *gin.Context) {
 	var ok bool
 	c.BindJSON(&data)
 	if len(data.Email) == 0 || len(data.Password) == 0 || len(data.UUID) == 0 {
-		utils.ResponseBadRequest(c, "Please provide email, password, and uuid")
+		utils.ResponseBadRequest(c, "Please provide email, password, and confirmation password")
 	}
 	user, err = repository.GetUserByEmail(data.Email)
 	if err != nil {
@@ -104,6 +104,79 @@ func ConfirmAccount(c *gin.Context) {
 		return
 	}
 	utils.ResponseSuccess(c, "Success to confirm account", gin.H{
+		"email": user.Email,
+	})
+}
+
+// RequestPassword ...
+func RequestPassword(c *gin.Context) {
+	var data model.RequestPasswordData
+	var user model.User
+	var err error
+	var newUUID string
+	var ok bool
+	c.BindJSON(&data)
+	if len(data.Email) == 0 {
+		utils.ResponseBadRequest(c, "Please provide email")
+		return
+	}
+	user, err = repository.GetUserByEmail(data.Email)
+	if err != nil {
+		utils.ResponseServerError(c)
+		return
+	}
+	if user == (model.User{}) {
+		utils.ResponseNotFound(c, "User not found")
+		return
+	}
+	newUUID = uuid.New().String()
+	ok, err = repository.NewUUID(newUUID, user.Email)
+	if !ok || err != nil {
+		utils.ResponseServerError(c)
+		return
+	}
+	utils.ResponseSuccess(c, "Success to get confirmation code", gin.H{
+		"email":            user.Email,
+		"confirmationCode": newUUID,
+	})
+}
+
+// ChangePassword ...
+func ChangePassword(c *gin.Context) {
+	var data model.ForgotPasswordData
+	var user model.User
+	var err error
+	var newPassword string
+	var ok bool
+	c.BindJSON(&data)
+	if len(data.Email) == 0 || len(data.NewPassword) == 0 || len(data.UUID) == 0 {
+		utils.ResponseBadRequest(c, "Please provide email, new password and confirmation code")
+		return
+	}
+	user, err = repository.GetUserByEmail(data.Email)
+	if err != nil {
+		utils.ResponseServerError(c)
+		return
+	}
+	if user == (model.User{}) {
+		utils.ResponseNotFound(c, "User not found")
+		return
+	}
+	if user.UUID != data.UUID {
+		utils.ResponseBadRequest(c, "Wrong confirmation code")
+		return
+	}
+	newPassword, err = utils.HashPassword(data.NewPassword)
+	if err != nil {
+		utils.ResponseServerError(c)
+		return
+	}
+	ok, err = repository.ChangePassword(data.Email, newPassword)
+	if !ok || err != nil {
+		utils.ResponseServerError(c)
+		return
+	}
+	utils.ResponseSuccess(c, "Success to change password", gin.H{
 		"email": user.Email,
 	})
 }
