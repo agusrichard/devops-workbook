@@ -4,11 +4,17 @@ import (
 	"golang-restapi/config"
 	"golang-restapi/handler"
 	"golang-restapi/middleware"
+	"log"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
 	r := gin.Default()
 
 	// Initialize database connection
@@ -19,6 +25,7 @@ func main() {
 	{
 		authRoute.POST("/register", handler.Register)
 		authRoute.POST("/login", handler.Login)
+		authRoute.POST("/confirm", handler.ConfirmAccount)
 	}
 
 	// Routes for User

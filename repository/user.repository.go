@@ -9,25 +9,26 @@ import (
 // CreateUser -- Create user
 func CreateUser(user *model.User) bool {
 	sqlQuery := `
-		INSERT INTO users (username, password) 
-		VALUES ($1, $2);
+		INSERT INTO users (email, password, uuid) 
+		VALUES ($1, $2, $3);
 	`
 
-	_, err := config.DB.Exec(sqlQuery, user.Username, user.Password)
+	_, err := config.DB.Exec(sqlQuery, user.Email, user.Password, user.UUID)
 	if err != nil {
+		// panic(err)
 		return false
 	}
 	fmt.Printf("Success to create user %v\n", *user)
 	return true
 }
 
-// GetUserByUsername -- Get user by username
-func GetUserByUsername(username string) (model.User, error) {
+// GetUserByEmail -- Get user by Email
+func GetUserByEmail(email string) (model.User, error) {
 	sqlQuery := `
-		SELECT _id, username, password FROM users
-		WHERE username = $1;
+		SELECT _id, email, password, uuid FROM users
+		WHERE email = $1;
 	`
-	rows, err := config.DB.Query(sqlQuery, username)
+	rows, err := config.DB.Query(sqlQuery, email)
 	if err != nil {
 		return model.User{}, err
 	}
@@ -36,8 +37,9 @@ func GetUserByUsername(username string) (model.User, error) {
 	for rows.Next() {
 		err = rows.Scan(
 			&user.ID,
-			&user.Username,
+			&user.Email,
 			&user.Password,
+			&user.UUID,
 		)
 		if err != nil {
 			return model.User{}, err
@@ -53,7 +55,7 @@ func GetUserByUsername(username string) (model.User, error) {
 // GetUserByID -- Get user data
 func GetUserByID(userID uint64) (model.User, error) {
 	sqlQuery := `
-		SELECT _id, username, password FROM users
+		SELECT _id, email, password FROM users
 		WHERE _id = $1
 	`
 	rows, err := config.DB.Query(sqlQuery, userID)
@@ -65,7 +67,7 @@ func GetUserByID(userID uint64) (model.User, error) {
 	for rows.Next() {
 		err = rows.Scan(
 			&user.ID,
-			&user.Username,
+			&user.Email,
 			&user.Password,
 		)
 		if err != nil {
@@ -77,4 +79,19 @@ func GetUserByID(userID uint64) (model.User, error) {
 		return model.User{}, err
 	}
 	return user, nil
+}
+
+// ConfirmAccount --  Update confirm field
+func ConfirmAccount(userID uint64) (bool, error) {
+	sqlQuery := `
+		UPDATE users
+		SET confirmed=TRUE
+		WHERE _id=$1
+	`
+
+	_, err := config.DB.Query(sqlQuery, userID)
+	if err != nil {
+		return false, err
+	}
+	return true, nil
 }

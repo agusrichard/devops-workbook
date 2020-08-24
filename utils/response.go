@@ -27,3 +27,10 @@ func ResponseBadRequest(c *gin.Context, message string) {
 		"message": message,
 	})
 }
+
+// ResponseServerError ...
+func ResponseServerError(c *gin.Context) {
+	c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
+		"message": "Internal Server Error",
+	})
+}

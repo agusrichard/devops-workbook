@@ -1,8 +1,10 @@
 -- Create users Table
 CREATE TABLE users (
     _id SERIAL PRIMARY KEY,
-    username VARCHAR(256) UNIQUE NOT NULL,
-    password VARCHAR(256) NOT NULL
+    email VARCHAR(256) UNIQUE NOT NULL,
+    password VARCHAR(256) NOT NULL,
+	uuid VARCHAR(256),
+	confirmed BOOLEAN DEFAULT FALSE
 );
 
 -- Create services table

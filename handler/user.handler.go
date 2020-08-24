@@ -17,7 +17,7 @@ func GetUserData(c *gin.Context) {
 		"message": "Nice to see you bruh!",
 		"data": gin.H{
 			"_id":      user.ID,
-			"username": user.Username,
+			"email":    user.Email,
 			"password": user.Password,
 		},
 	})
