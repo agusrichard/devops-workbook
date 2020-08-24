@@ -2,6 +2,7 @@ package repository
 
 import (
 	"fmt"
+	"golang-restapi/config"
 	"golang-restapi/model"
 )
 
@@ -22,7 +23,7 @@ func CreateServiceRequest(service *model.Service, userID uint64) {
 		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);
 	`
 
-	_, err := DB.Exec(sqlQuery,
+	_, err := config.DB.Exec(sqlQuery,
 		service.RequestID,
 		service.Status,
 		service.VesselName,
@@ -46,7 +47,7 @@ func GetServices(userID uint64) []model.Service {
 		WHERE user_id = $1;
 		
 	`
-	rows, err := DB.Query(sqlQuery, userID)
+	rows, err := config.DB.Query(sqlQuery, userID)
 	if err != nil {
 		panic(err)
 	}

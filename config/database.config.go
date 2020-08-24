@@ -1,10 +1,10 @@
-package repository
+package config
 
 import (
 	"database/sql"
 	"fmt"
 
-	// something
+	// Postgres
 	_ "github.com/lib/pq"
 )
 

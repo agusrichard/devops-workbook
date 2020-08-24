@@ -2,6 +2,7 @@ package repository
 
 import (
 	"fmt"
+	"golang-restapi/config"
 	"golang-restapi/model"
 )
 
@@ -12,7 +13,7 @@ func CreateUser(user *model.User) bool {
 		VALUES ($1, $2);
 	`
 
-	_, err := DB.Exec(sqlQuery, user.Username, user.Password)
+	_, err := config.DB.Exec(sqlQuery, user.Username, user.Password)
 	if err != nil {
 		return false
 	}
@@ -26,7 +27,7 @@ func GetUserByUsername(username string) (model.User, error) {
 		SELECT _id, username, password FROM users
 		WHERE username = $1;
 	`
-	rows, err := DB.Query(sqlQuery, username)
+	rows, err := config.DB.Query(sqlQuery, username)
 	if err != nil {
 		return model.User{}, err
 	}
@@ -55,7 +56,7 @@ func GetUserByID(userID uint64) (model.User, error) {
 		SELECT _id, username, password FROM users
 		WHERE _id = $1
 	`
-	rows, err := DB.Query(sqlQuery, userID)
+	rows, err := config.DB.Query(sqlQuery, userID)
 	if err != nil {
 		return model.User{}, err
 	}

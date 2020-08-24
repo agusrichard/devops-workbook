@@ -1,4 +1,4 @@
-package router
+package handler
 
 import (
 	"golang-restapi/model"
