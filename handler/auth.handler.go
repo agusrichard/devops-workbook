@@ -40,37 +40,42 @@ func Register(c *gin.Context) {
 
 // Login handler function
 func Login(c *gin.Context) {
-	var loginUser model.User
+	var data model.LoginData
 	var user model.User
 	var err error
 	var token string
-	c.BindJSON(&loginUser)
-	if len(loginUser.Email) == 0 || len(loginUser.Password) == 0 {
+	c.BindJSON(&data)
+	if len(data.Email) == 0 || len(data.Password) == 0 {
 		utils.ResponseBadRequest(c, "Please provide email and password")
 		return
 	}
-	user, err = repository.GetUserByEmail(loginUser.Email)
+	user, err = repository.GetUserByEmail(data.Email)
 	if err != nil {
 		utils.ResponseServerError(c)
 		return
 	}
-	if utils.CheckPasswordHash(loginUser.Password, user.Password) {
-		token, err = utils.CreateToken(user.ID)
-		if err != nil {
-			utils.ResponseServerError(c)
-			return
-		}
-		utils.ResponseSuccess(c, "Login success", gin.H{
-			"user": gin.H{
-				"_id":      user.ID,
-				"username": user.Email,
-				"password": user.Password,
-			},
-			"token": token,
-		})
+	if !user.Confirmed {
+		utils.ResponseBadRequest(c, "Please confirm your account")
 		return
 	}
-	utils.ResponseBadRequest(c, "Invalid username or password")
+
+	if !utils.CheckPasswordHash(data.Password, user.Password) {
+		utils.ResponseBadRequest(c, "Invalid username or password")
+		return
+	}
+	token, err = utils.CreateToken(user.ID)
+	if err != nil {
+		utils.ResponseServerError(c)
+		return
+	}
+	utils.ResponseSuccess(c, "Login success", gin.H{
+		"user": gin.H{
+			"_id":      user.ID,
+			"username": user.Email,
+			"password": user.Password,
+		},
+		"token": token,
+	})
 	return
 }
 
@@ -81,7 +86,6 @@ func ConfirmAccount(c *gin.Context) {
 	var err error
 	var ok bool
 	c.BindJSON(&data)
-	fmt.Println("data", data)
 	if len(data.Email) == 0 || len(data.Password) == 0 || len(data.UUID) == 0 {
 		utils.ResponseBadRequest(c, "Please provide email, password, and uuid")
 	}
@@ -90,9 +94,6 @@ func ConfirmAccount(c *gin.Context) {
 		utils.ResponseServerError(c)
 		return
 	}
-	fmt.Println("user", user)
-	fmt.Println(user.UUID, data.UUID)
-	fmt.Println(user.UUID == data.UUID)
 	if user.UUID != data.UUID {
 		utils.ResponseBadRequest(c, "Wrong confirmation code")
 		return

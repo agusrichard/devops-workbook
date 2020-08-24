@@ -25,7 +25,7 @@ func CreateUser(user *model.User) bool {
 // GetUserByEmail -- Get user by Email
 func GetUserByEmail(email string) (model.User, error) {
 	sqlQuery := `
-		SELECT _id, email, password, uuid FROM users
+		SELECT _id, email, password, uuid, confirmed FROM users
 		WHERE email = $1;
 	`
 	rows, err := config.DB.Query(sqlQuery, email)
@@ -40,6 +40,7 @@ func GetUserByEmail(email string) (model.User, error) {
 			&user.Email,
 			&user.Password,
 			&user.UUID,
+			&user.Confirmed,
 		)
 		if err != nil {
 			return model.User{}, err

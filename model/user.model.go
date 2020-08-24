@@ -15,3 +15,9 @@ type ConfirmData struct {
 	Password string `json:"password"`
 	UUID     string `json:"uuid"`
 }
+
+// LoginData --- Used in Login handler
+type LoginData struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
