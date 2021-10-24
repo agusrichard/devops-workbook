@@ -1,3 +1,3 @@
-# Learn Golang RestfulAPI
+# AWS Workbook
 
-Golang RestAPI
+Learning notes and practice projects, all about AWS
