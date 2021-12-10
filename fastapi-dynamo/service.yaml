@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fastapi-dynamo-service
+spec:
+  selector:
+    app: fastapi-dynamo
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8000
+    protocol: TCP
+  type: LoadBalancer
