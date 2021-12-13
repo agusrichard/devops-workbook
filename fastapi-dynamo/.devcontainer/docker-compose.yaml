@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+      args:
+        # [Choice] Python version (use -bullseye variants on local arm64/Apple Silicon): 3, 3.10, 3.9, 3.8, 3.7, 3.6, 3-bullseye, 
+        # 3.10-bullseye, 3.9-bullseye, 3.8-bullseye, 3.7-bullseye, 3.6-bullseye, 
+        # 3-buster, 3.10-buster, 3.9-buster, 3.8-buster, 3.7-buster, 3.6-buster
+        VARIANT: 3.9
+        # Optional Node.js version to install
+        NODE_VERSION: "none"
+
+    volumes:
+      - ..:/workspace/fastapi-dynamo:cached  
+
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+
+    # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
+    network_mode: service:db
+
+    # Uncomment the next line to use a non-root user for all processes.
+    # user: vscode
+
+  db:
+    image: amazon/dynamodb-local
+    restart: unless-stopped
+    ports:
+      - 8000:8000
