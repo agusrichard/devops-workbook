@@ -29,10 +29,10 @@ def main():
 
     table = ddb.Table('Transactions')
 
-    input = {'TransactionId': '9a0', 'State': 'PENDING', 'Amount': 50}
+    ipt = {'TransactionId': '9a0', 'State': 'PENDING', 'Amount': 50}
 
     #3 - Insert Data
-    table.put_item(Item=input)
+    table.put_item(Item=ipt)
     print('Successfully put item')
 
     #4 - Scan Table
