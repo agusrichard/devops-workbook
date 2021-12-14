@@ -29,7 +29,7 @@ def main():
 
     table = ddb.Table('Transactions')
 
-    ipt = {'TransactionId': '9a0', 'State': 'PENDING', 'Amount': 50}
+    ipt = {'TransactionId': '9a1', 'State': 'SUCCESS', 'Amount': 50}
 
     #3 - Insert Data
     table.put_item(Item=ipt)
