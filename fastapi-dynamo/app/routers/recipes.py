@@ -1,12 +1,17 @@
 from fastapi import APIRouter
 from domain.recipes import RecipesDomain
 
-def make_recipes_router(recipes_domain: RecipesDomain) -> APIRouter:
-    router = APIRouter(prefix='/recipes', tags=['recipes'])
 
-    @router.get('/')
-    async def index():
-        return 'Hello! Welcome to recipes index route'
+class RecipesRouter:
+    def __init__(self, recipes_domain: RecipesDomain) -> None:
+        self.__recipes_domain = recipes_domain
 
+    @property
+    def router(self):
+        api_router = APIRouter(prefix='/recipes', tags=['recipes'])
+        
+        @api_router.get('/')
+        def index_route():
+            return 'Hello! Welcome to recipes index route'
 
-    return router
+        return api_router

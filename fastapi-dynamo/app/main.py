@@ -5,7 +5,7 @@ from internal.db import initialize_db
 
 from domain.recipes import RecipesDomain
 from repository.recipes import RecipesRepository
-from routers.recipes import make_recipes_router
+from routers.recipes import RecipesRouter
 
 app = FastAPI()
 
@@ -15,9 +15,9 @@ db = initialize_db()
 
 recipes_repository = RecipesRepository(db)
 recipes_domain = RecipesDomain(recipes_repository)
-recipes_router = make_recipes_router(recipes_domain)
+recipes_router = RecipesRouter(recipes_domain)
 
-app.include_router(recipes_router)
+app.include_router(recipes_router.router)
 
 @app.get('/')
 def index():
