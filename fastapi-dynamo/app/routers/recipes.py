@@ -1,4 +1,6 @@
 from fastapi import APIRouter
+from fastapi import FastAPI, HTTPException
+
 from domain.recipes import RecipesDomain, RecipesModel
 
 
@@ -14,8 +16,23 @@ class RecipesRouter:
         def index_route():
             return 'Hello! Welcome to recipes index route'
 
-        @api_router.post('/')
+        @api_router.post('/create')
         def create_recipe(recipes_model: RecipesModel):
             return self.__recipes_domain.create_recipe(recipes_model)
+
+        @api_router.get('/get/{recipe_uid}')
+        def get_recipe(recipe_uid: str):
+            try:
+                return self.__recipes_domain.get_recipe(recipe_uid)
+            except KeyError:
+                raise HTTPException(status_code=400, detail='No recipe found')
+
+        @api_router.put('/update')
+        def update_recipe(recipes_model: RecipesModel):
+            return self.__recipes_domain.update_recipe(recipes_model)
+
+        @api_router.delete('/delete/{recipe_uid}')
+        def delete_recipe(recipe_uid: str):
+            return self.__recipes_domain.delete_recipe(recipe_uid)
 
         return api_router
