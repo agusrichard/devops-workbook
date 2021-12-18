@@ -35,4 +35,8 @@ class RecipesRouter:
         def delete_recipe(recipe_uid: str):
             return self.__recipes_domain.delete_recipe(recipe_uid)
 
+        @api_router.get('/all')
+        def get_all():
+            return self.__recipes_domain.get_all()
+
         return api_router

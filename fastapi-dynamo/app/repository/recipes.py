@@ -47,7 +47,8 @@ class RecipesRepository:
             Key={'uid': uid}
         )
         return response
-            
 
-    
-        
+    def get_all(self):
+        table = self.__db.Table('Recipes')
+        response = table.scan()
+        return response.get('Items', [])

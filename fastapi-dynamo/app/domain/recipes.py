@@ -36,3 +36,6 @@ class RecipesDomain():
 
     def delete_recipe(self, uid: str):
         return self.__repository.delete_recipe(uid)
+
+    def get_all(self):
+        return self.__repository.get_all()
