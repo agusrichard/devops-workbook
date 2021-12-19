@@ -20,3 +20,7 @@ def generate_recipes(ddb):
         }
     )
     print('Successfully created table Recipes')
+
+def drop_recipes(ddb):
+    table = ddb.Table('Recipes')
+    table.delete()
