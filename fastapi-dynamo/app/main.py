@@ -1,11 +1,11 @@
 import uvicorn
 from fastapi import FastAPI
 
-from internal.db import initialize_db
+from .internal.db import initialize_db
 
-from domain.recipes import RecipesDomain
-from repository.recipes import RecipesRepository
-from routers.recipes import RecipesRouter
+from .domain.recipes import RecipesDomain
+from .repository.recipes import RecipesRepository
+from .routers.recipes import RecipesRouter
 
 app = FastAPI()
 
