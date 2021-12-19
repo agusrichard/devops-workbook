@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from fastapi import HTTPException
 
-from ..domain.recipes import RecipesDomain, RecipesModel
+from app.domain.recipes import RecipesDomain, RecipesModel
 
 
 class RecipesRouter:

@@ -11,10 +11,11 @@ class TestClass:
         print('\n\n\n----- Setup test class -----\n\n\n')
         try:
             generate_table()
-        except ClientError:
-            pass
-        else:
+        except ClientError as e:
+            print('Error:', e)
+        finally:
             cls.client = TestClient(app)
+            
 
     @classmethod
     def teardown_class(cls):
@@ -25,3 +26,25 @@ class TestClass:
         response = self.client.get('/')
         assert response.status_code == 200
         assert response.json() == 'Hello World!'
+
+    def test_recipes_index(self):
+        response = self.client.get('/recipes/')
+        assert response.status_code == 200
+        assert response.json() == 'Hello! Welcome to recipes index route'
+
+    def test_recipes_create(self):
+        payload = {
+            'title': 'Test recipe',
+            'author': 'Test author',
+            'description': 'Test description',
+            'ingredients': [
+                {
+                    'name': 'Test ingredient',
+                    'uom': '1',
+                    'amount': 1
+                }
+            ],
+            'steps': ['Step 1', 'Step 2']
+        }
+        response = self.client.post('/recipes/create', json=payload)
+        assert response.status_code == 200

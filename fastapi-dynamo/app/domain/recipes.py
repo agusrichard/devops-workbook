@@ -5,7 +5,7 @@ from pydantic import BaseModel
 from pydantic.types import UUID4
 from typing import List, Optional
 
-from ..repository.recipes import RecipesRepository
+from app.repository.recipes import RecipesRepository
 
 class Ingredients(BaseModel):
     name: str = Field(..., example='Rice')
