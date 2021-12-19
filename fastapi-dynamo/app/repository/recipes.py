@@ -1,5 +1,5 @@
-from boto3.resources.base import ServiceResource
 from botocore.exceptions import ClientError
+from boto3.resources.base import ServiceResource
 
 class RecipesRepository:
     def __init__(self, db: ServiceResource) -> None:

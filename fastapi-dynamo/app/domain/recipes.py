@@ -1,9 +1,10 @@
-from pydantic import BaseModel
 from uuid import uuid4
 from pydantic import Field
 from decimal import Decimal
-from typing import List, Optional
+from pydantic import BaseModel
 from pydantic.types import UUID4
+from typing import List, Optional
+
 from repository.recipes import RecipesRepository
 
 class Ingredients(BaseModel):
