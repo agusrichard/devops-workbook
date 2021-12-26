@@ -1,0 +1,42 @@
+AWS things to practise:
+[Section 6: EC2 Instance Storage]
+x Create an ec2 instance
+x Check for the root volume (EBS volume)
+x Create an EBS volume and attach it to ec2 instance
+x Need to be in the same az
+
+x Create ebs snapshot
+x Copy it to different az
+
+x Create AMI
+x Launch using the previous AMI
+
+x Create AMI using ec2 image builder
+x Connect to ec2 instance from above process
+
+[Section 7: ELB and ASG]
+- create 3 ec3 instances
+- create elb
+- create target groups
+
+- make launch template
+- create lb
+- create asg
+
+
+[Section S3]
+- create s3 bucket
+- upload an object (image)
+- create folder
+- upload an object into this folder
+
+- change s3 bucket policies to public
+- make sure that the uploaded objects can be accessed publicly
+
+- host static website
+- test the generated static website
+
+- Upload the same file (and have versioning)
+- Delete the last file
+- Delete one file (introduce delete marker)
+- Rollback so we have back the deleted file
