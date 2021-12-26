@@ -1,0 +1,28 @@
+AWS things to practise:
+[Section 6: EC2 Instance Storage]
+x Create an ec2 instance
+x Check for the root volume (EBS volume)
+x Create an EBS volume and attach it to ec2 instance
+x Need to be in the same az
+
+x Create ebs snapshot
+x Copy it to different az
+
+x Create AMI
+x Launch using the previous AMI
+
+- Create AMI using ec2 image builder
+- Connect to ec2 instance from above process
+
+[Section 7: ELB and ASG]
+- create 3 ec3 instances
+- create elb
+- create target groups
+
+- make launch template
+- create lb
+- create asg
+
+
+[Section S3]
+- 
