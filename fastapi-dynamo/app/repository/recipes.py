@@ -5,10 +5,10 @@ class RecipesRepository:
     def __init__(self, db: ServiceResource) -> None:
         self.__db = db
 
-    def create_recipe(self, recipe: dict):
+    def get_all(self):
         table = self.__db.Table('Recipes')
-        response = table.put_item(Item=recipe)
-        return response
+        response = table.scan()
+        return response.get('Items', [])
 
     def get_recipe(self, uid: str):
         try:
@@ -16,7 +16,12 @@ class RecipesRepository:
             response = table.get_item(Key={'uid': uid})
             return response['Item']
         except ClientError as e:
-            raise ValueError(e.response['Error']['Message'])\
+            raise ValueError(e.response['Error']['Message'])
+
+    def create_recipe(self, recipe: dict):
+        table = self.__db.Table('Recipes')
+        response = table.put_item(Item=recipe)
+        return response
 
     def update_recipe(self, recipe: dict):
         table = self.__db.Table('Recipes')
@@ -47,8 +52,3 @@ class RecipesRepository:
             Key={'uid': uid}
         )
         return response
-
-    def get_all(self):
-        table = self.__db.Table('Recipes')
-        response = table.scan()
-        return response.get('Items', [])
