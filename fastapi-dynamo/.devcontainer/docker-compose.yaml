@@ -39,9 +39,9 @@ services:
     - 8001:8001
     environment:
       - DYNAMO_ENDPOINT=http://db:8000
-      - AWS_REGION=dummy
-      - AWS_ACCESS_KEY_ID=dummy
-      - AWS_SECRET_ACCESS_KEY=dummy
+      - AWS_REGION=example
+      - AWS_ACCESS_KEY_ID=example
+      - AWS_SECRET_ACCESS_KEY=example
     networks:
       - dynamodb-net
     depends_on:

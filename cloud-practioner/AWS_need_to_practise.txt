@@ -1,30 +1,5 @@
 AWS things to practise:
-[Section 6: EC2 Instance Storage]
-x Create an ec2 instance
-x Check for the root volume (EBS volume)
-x Create an EBS volume and attach it to ec2 instance
-x Need to be in the same az
-
-x Create ebs snapshot
-x Copy it to different az
-
-x Create AMI
-x Launch using the previous AMI
-
-x Create AMI using ec2 image builder
-x Connect to ec2 instance from above process
-
-[Section 7: ELB and ASG]
-- create 3 ec3 instances
-- create elb
-- create target groups
-
-- make launch template
-- create lb
-- create asg
-
-
-[Section S3]
+[Section 8: S3]
 - create s3 bucket
 - upload an object (image)
 - create folder
@@ -40,3 +15,26 @@ x Connect to ec2 instance from above process
 - Delete the last file
 - Delete one file (introduce delete marker)
 - Rollback so we have back the deleted file
+
+- Create s3 bucket to be the target of server access logging
+- Enable server access logging on the source s3 bucket
+
+- Create s3 bucket as replication target
+- Enable replication on the main bucket
+- Check if the replication is correct
+
+- Upload an object with storage class x (you choose)
+- create lifecycle rule
+
+[Section 9: Database and Analytics]
+- create database
+- create snapshot
+- look around about what you can you can do with this snapshot
+
+- create dynamodb table
+- crud operations to dynamodb table
+- delete dynamodb table
+
+[Section 10: Computer services]
+- Create lambda function
+- Test and test
