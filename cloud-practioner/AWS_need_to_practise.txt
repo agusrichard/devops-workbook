@@ -38,3 +38,7 @@ AWS things to practise:
 [Section 10: Computer services]
 - Create lambda function
 - Test and test
+
+[Section 11: Deployments and Infrastructure]
+- Create cloud formation
+- Update cloud formation template
