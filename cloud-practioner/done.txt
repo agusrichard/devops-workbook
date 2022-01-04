@@ -22,3 +22,7 @@ x create target groups
 x make launch template
 x create lb
 x create asg
+
+[Section 10: Computer services]
+x Create lambda function
+x Test and test
