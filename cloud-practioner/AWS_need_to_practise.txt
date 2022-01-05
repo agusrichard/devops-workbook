@@ -38,3 +38,15 @@ AWS things to practise:
 [Section 11: Deployments and Infrastructure]
 - Create cloud formation
 - Update cloud formation template
+
+[Section 12: Global Infrastructure]
+- s3 with cloudfront
+
+[Section 13: Cloud Integrations]
+- create sqs
+- send and poll messages
+
+- create sns
+- create mailnator mailbox
+- create subscriber
+- send message
