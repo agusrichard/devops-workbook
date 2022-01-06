@@ -35,10 +35,6 @@ AWS things to practise:
 - crud operations to dynamodb table
 - delete dynamodb table
 
-[Section 11: Deployments and Infrastructure]
-- Create cloud formation
-- Update cloud formation template
-
 [Section 12: Global Infrastructure]
 - s3 with cloudfront
 

@@ -26,3 +26,7 @@ x create asg
 [Section 10: Computer services]
 x Create lambda function
 x Test and test
+
+[Section 11: Deployments and Infrastructure]
+x Create cloud formation
+x Update cloud formation template
