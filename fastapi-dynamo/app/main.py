@@ -19,11 +19,6 @@ recipes_router = RecipesRouter(recipes_domain)
 
 app.include_router(recipes_router.router)
 
-try:
-    from generate_table.__main__ import generate_table
-    generate_table()
-except Exception as e:
-    print('Error:', e)
 
 @app.get('/')
 def index():
