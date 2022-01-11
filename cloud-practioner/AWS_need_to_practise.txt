@@ -31,9 +31,9 @@ AWS things to practise:
 - create snapshot
 - look around about what you can you can do with this snapshot
 
-- create dynamodb table
-- crud operations to dynamodb table
-- delete dynamodb table
+x create dynamodb table
+x crud operations to dynamodb table
+x delete dynamodb table
 
 [Section 12: Global Infrastructure]
 - s3 with cloudfront
