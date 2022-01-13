@@ -27,9 +27,9 @@ AWS things to practise:
 - create lifecycle rule
 
 [Section 9: Database and Analytics]
-- create database
-- create snapshot
-- look around about what you can you can do with this snapshot
+x create database
+x create snapshot
+x look around about what you can you can do with this snapshot
 
 x create dynamodb table
 x crud operations to dynamodb table
