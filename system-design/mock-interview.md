@@ -5,6 +5,7 @@
 ## List of Contents:
 
 ### 1. [Design Netflix](#content-1)
+### 1. [Design Youtube](#content-2)
 
 </br>
 
@@ -52,6 +53,29 @@
 
 ---
 
+## [Design Youtube](https://www.youtube.com/watch?v=1xV5WI0OFkg) <span id="content-2"></span>
+
+- Functional requirements:
+  - Upload videos from multiple devices
+  - Viewing experience should be agnostic
+  - Ask about what to focus
+- Non-functional requiements:
+  - High availability
+  - Has low latency
+- More people reading/streaming compared to write
+- Client --> video upload service. WebRTC to be used for streaming.
+- Video upload service (Video content) --> Transcoding queue --> blog store
+- Video upload service (video's metadata) -> DB
+- CDN <-- User --> Video streaming service
+
+
+**[⬆ back to top](#list-of-contents)**
+
+</br>
+
+---
+
 ## References:
 
 - https://www.youtube.com/watch?v=VvZf7lISfgs
+- https://www.youtube.com/watch?v=1xV5WI0OFkg
