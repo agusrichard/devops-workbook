@@ -1,0 +1,12 @@
+service: try-serverless
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.8
+  region: ap-southeast-1
+
+functions:
+  hello:
+    handler: handler.hello
