@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  app:
+    build: .
+    environment: 
+      - FLASK_ENV=development
+      - FLASK_APP=app.py
+    ports:
+      - "5000:5000"
+    volumes: 
+      - "./:/app"
+  redis:
+    container_name: redis
+    image: redis:6.2-alpine
+  celery_worker:
+    build: .
+    command: celery -A app.celery worker -l INFO
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    environment:
+      - CELERY_BROKER_URL=${CELERY_BROKER_URL}
+      - CELERY_RESULT_BACKEND=${CELERY_RESULT_BACKEND}
+    depends_on:
+      - app
+      - redis
