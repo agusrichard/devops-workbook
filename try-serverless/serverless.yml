@@ -1,12 +1,43 @@
+org: agusrichard
+app: try-serverless
 service: try-serverless
 
-frameworkVersion: '3'
+frameworkVersion: "3"
 
 provider:
   name: aws
   runtime: python3.8
   region: ap-southeast-1
+  environment:
+    DYNAMODB_CUSTOMER_TABLE: ${self:service}-todoTable-${sls:stage}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "dynamodb:PutItem"
+        - "dynamodb:Get*"
+        - "dynamodb:Scan*"
+        - "dynamodb:UpdateItem"
+        - "dynamodb:DeleteItem"
+      Resource: arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/${self:service}-todoTable-${sls:stage}
 
 functions:
-  hello:
-    handler: handler.hello
+  createTodo:
+    handler: handler.createTodo
+    events:
+      - httpApi:
+          method: POST
+          path: /todos
+
+resources:
+  Resources:
+    TodoTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: primary_key
+            AttributeType: S
+        BillingMode: PAY_PER_REQUEST
+        KeySchema:
+          - AttributeName: primary_key
+            KeyType: HASH
+        TableName: ${self:service}-todoTable-${sls:stage}
