@@ -1,7 +1,7 @@
 import json
 
 
-def createTodo(event, context):
+def run(event, context):
     body = {
         "message": "Go Serverless v3.0! Your function executed successfully!",
         "input": event,

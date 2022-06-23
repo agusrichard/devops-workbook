@@ -21,8 +21,8 @@ provider:
       Resource: arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/${self:service}-todoTable-${sls:stage}
 
 functions:
-  createTodo:
-    handler: handler.createTodo
+  run:
+    handler: handler.run
     events:
       - httpApi:
           method: POST
