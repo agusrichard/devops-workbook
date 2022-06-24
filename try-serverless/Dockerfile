@@ -1,10 +1,13 @@
-FROM public.ecr.aws/lambda/python:3.8
 
-COPY requirements.txt ${LAMBDA_TASK_ROOT}
+FROM lambci/lambda:python3.8
 
-RUN pip install -r requirements.txt
+USER root
 
-# Copy function code
-COPY . ${LAMBDA_TASK_ROOT}
+ENV APP_DIR /var/task
 
-CMD [ "handler.run" ]
+WORKDIR $APP_DIR
+
+COPY requirements.txt .
+
+RUN mkdir -p $APP_DIR/lib
+RUN pip3 install -r requirements.txt -t $APP_DIR/lib

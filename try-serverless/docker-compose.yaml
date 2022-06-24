@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  lambda:
+    build: .
+    environment:
+      - PYTHONPATH=/var/task:/var/task/lib
+      # - DOCKER_LAMBDA_STAY_OPEN=1
+    volumes:
+      - .:/var/task
+      - ./tmp/:/tmp/
+    ports:
+      - "9001:9001"
