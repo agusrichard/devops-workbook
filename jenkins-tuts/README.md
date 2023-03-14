@@ -4,14 +4,14 @@
 
 ## List of Contents:
 
-### 1. [Guided Tour - Jenkins Official Documentation](#content-1)
+### 1. [Learn Jenkins! Complete Jenkins Course - Zero to Hero](#content-1)
 
 <br />
 
 ---
 
 ## Contents:
-## [Guided Tour - Jenkins Official Documentation](https://www.jenkins.io/doc/pipeline/tour/getting-started/) <span id="content-1"></span>
+## [Learn Jenkins! Complete Jenkins Course - Zero to Hero](https://www.youtube.com/watch?v=6YZvp2GwT0A) <span id="content-1"></span>
 
 
 
@@ -22,4 +22,5 @@
 ---
 
 ## References:
+- https://www.youtube.com/watch?v=6YZvp2GwT0A
 - https://www.jenkins.io/doc/pipeline/tour/getting-started/
