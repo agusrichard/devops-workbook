@@ -5,6 +5,8 @@ def love():
     print("it sucks to love her")
     print("forget about girl and focus on what you need learn and work")
     print("tell me her name!")
+    print("Her name is Veni Alifa")
+    print("VENI ALIFA")
 
 
 if __name__ == '__main__':
