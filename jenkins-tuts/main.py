@@ -7,6 +7,7 @@ def love():
     print("tell me her name!")
     print("Her name is Veni Alifa")
     print("VENI ALIFA")
+    print("I have fever now, Veni! Will you take care of me?")
 
 
 if __name__ == '__main__':
