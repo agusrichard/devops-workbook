@@ -1,7 +1,5 @@
 def love():
-    print("forget about the girl")
-    print("we'll move to Bandung")
-    print("it has been a long time since we met")
+    print("Now, again for million of times. We will restart this one!")
 
 
 if __name__ == '__main__':
