@@ -43,3 +43,4 @@
 - https://www.youtube.com/watch?v=6YZvp2GwT0A
 - https://www.jenkins.io/doc/pipeline/tour/getting-started/
 - https://devopscube.com/jenkins-2-tutorials-getting-started-guide/
+- https://github.com/devopsjourney1/jenkins-101
