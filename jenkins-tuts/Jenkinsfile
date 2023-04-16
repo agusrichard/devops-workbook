@@ -12,7 +12,7 @@ pipeline {
             steps {
                 echo "Building.."
                 sh '''
-                cd app
+                cd jenkins-tuts/app
                 pip install -r requirements.txt
                 '''
             }
@@ -21,7 +21,7 @@ pipeline {
             steps {
                 echo "Testing.."
                 sh '''
-                cd app
+                cd jenkins-tuts/app
                 python3 main.py
                 python3 main.py --name=VeniAlifa
                 '''
