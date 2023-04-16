@@ -1,10 +1,39 @@
 pipeline {
-  agent { docker { image 'python:3.10.7-alpine' } }
-  stages {
-    stage('build') {
-      steps {
-        sh 'python --version'
+    agent {
+        node {
+            label 'docker-agent-python'
+            }
       }
+    triggers {
+        pollSCM '* * * * *'
     }
-  }
+    stages {
+        stage('Build') {
+            steps {
+                echo "Building.."
+                sh '''
+                cd app
+                pip install -r requirements.txt
+                '''
+            }
+        }
+        stage('Test') {
+            steps {
+                echo "Testing.."
+                sh '''
+                cd app
+                python3 main.py
+                python3 main.py --name=VeniAlifa
+                '''
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploy....'
+                sh '''
+                echo "doing deploy stuff.."
+                '''
+            }
+        }
+    }
 }
