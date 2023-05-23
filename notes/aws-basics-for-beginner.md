@@ -1,1 +1,0 @@
-# AWS BaSics for Beginners
