@@ -7,7 +7,12 @@
 ### 2. [What is the OSI Model?](#content-2)
 ### 3. [OSI Model](#content-3)
 ### 4. [What Is Computer Networking?](#content-4)
-### 5. [What Is Computer Networking?](#content-5)
+### 5. [POSIX](#content-5)
+### 6. [What is the meaning of "POSIX"?](#content-6)
+### 7. [What is POSIX? Why Does it Matter to Linux/UNIX Users?](#content-7)
+### 8. [What is a Network Socket?](#content-8)
+### 9. [What is a Socket](#content-9)
+### 10. [Socket Programming in Computer Network](#content-10)
 
 <br />
 
@@ -192,6 +197,49 @@
 - Basically, POSIX is geared toward operating system designers and software developers, but as users of a system
 
 
+## [What is a Network Socket?](https://www.tutorialspoint.com/what-is-a-network-socket-computer-networks) <span id="content-8"></span>
+
+### Introduction
+- A network socket is a software component within a computer network node that acts as an endpoint for delivering and receiving data.
+- In this context, a socket's address, which is the triad of the transport protocol, IP address, and port number, is used to externally identify it to other hosts.
+
+### Types of Sockets
+- Datagram Socket
+  - A datagram socket is a type of network socket in which packets are sent and received without the use of a link. It resembles a mailbox. Letters (data) are gathered and delivered (transmitted) to a mailbox (receiving socket). It is a connection-less socket.
+- Stream Socket
+  - A stream socket is a type of network socket in a computer operating system that provides a connection-oriented, sequenced, and unique flow of data without record boundaries, as well as well-defined mechanisms for creating and destroying connections and detecting errors. It is comparable to a telephone. Between the phones (two ends), a link is created. 
+- The following diagram shows the complete Client and Server interaction
+  ![Diagram -- Client and Server Interaction](https://www.tutorialspoint.com/assets/questions/media/55610/types_of_sockets.jpg)
+
+
+## [What is a Socket?](https://docs.oracle.com/javase/tutorial/networking/sockets/definition.html#:~:text=Definition%3A,address%20and%20a%20port%20number.) <span id="content-9"></span>
+- The server just waits, listening to the socket for a client to make a connection request.
+- On the client-side: The client knows the hostname of the machine on which the server is running and the port number on which the server is listening. To make a connection request, the client tries to rendezvous with the server on the server's machine and port.
+- The client also needs to identify itself to the server so it binds to a local port number that it will use during this connection. This is usually assigned by the system.
+- If everything goes well, the server accepts the connection. Upon acceptance, the server gets a new socket bound to the same local port and also has its remote endpoint set to the address and port of the client.
+- It needs a new socket so that it can continue to listen to the original socket for connection requests while tending to the needs of the connected client.
+- On the client side, if the connection is accepted, a socket is successfully created and the client can use the socket to communicate with the server.
+- Definition:
+  - A socket is one endpoint of a two-way communication link between two programs running on the network. A socket is bound to a port number so that the TCP l
+- An endpoint is a combination of an IP address and a port number. Every TCP connection can be uniquely identified by its two endpoints.
+
+
+## [Socket Programming in Computer Network](https://www.scaler.com/topics/computer-network/socket-programming/) <span id="content-10"></span>
+
+### Overview
+- Sockets in computer networks are used for allowing the transmission of information between two processes of the same machines or different machines in the network.
+- The socket is the combination of IP address and software port number used for communication between multiple processes. 
+- Socket helps to recognize the address of the application to which data is to be sent using the IP address and port number.
+
+### What is Socket Programming in Computer Networks?
+- Sockets are the end of two-way communication between two programs that are running on the networks.
+- Sockets are mostly used in client-server architecture for communication between multiple applications.
+- Socket address:
+  ![Socket Address](https://scaler.com/topics/images/socket-programming-in-computer-networks.webp)
+- TCP Socket Connection:
+  ![TCP Socket Connection](https://scaler.com/topics/images/socket-programming-in-tcp.webp)
+
+
 **[⬆ back to top](#list-of-contents)**
 
 <br />
@@ -203,3 +251,7 @@
 - https://www.cloudflare.com/learning/ddos/glossary/open-systems-interconnection-model-osi/
 - https://www.imperva.com/learn/application-security/osi-model/
 - https://aws.amazon.com/what-is/computer-networking/
+- https://www.techtarget.com/whatis/definition/POSIX-Portable-Operating-System-Interface#:~:text=POSIX%20(Portable%20Operating%20System%20Interface)%20is%20a%20set%20of%20standard,on%20the%20Unix%20operating%20system.
+- https://stackoverflow.com/questions/1780599/what-is-the-meaning-of-posix
+- https://www.baeldung.com/linux/posix
+- https://itsfoss.com/posix/
