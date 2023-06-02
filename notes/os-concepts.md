@@ -7,6 +7,7 @@
 ### 2. [What is the OSI Model?](#content-2)
 ### 3. [OSI Model](#content-3)
 ### 4. [What Is Computer Networking?](#content-4)
+### 5. [What Is Computer Networking?](#content-5)
 
 <br />
 
@@ -152,6 +153,43 @@
 - Cloud networks
   - Conceptually, a cloud network can be seen as a WAN with its infrastructure delivered by a cloud-based service. Some or all of an organization’s network capabilities and resources are hosted in a public or private cloud platform and made available on demand. These network resources can include virtual routers, firewalls, bandwidth, and network management software,with other tools and functions available as required.
   - Businesses today use cloud networks to accelerate time-to-market, increase scale, and manage costs effectively. The cloud network model has become the standard approach for building and delivering applications for modern enterprises.
+
+
+## [POSIX](https://www.techtarget.com/whatis/definition/POSIX-Portable-Operating-System-Interface#:~:text=POSIX%20(Portable%20Operating%20System%20Interface)%20is%20a%20set%20of%20standard,on%20the%20Unix%20operating%20system.) <span id="content-5"></span>
+
+### What is POSIX (Portable Operating System Interface)?
+- POSIX (Portable Operating System Interface) is a set of standard operating system interfaces based on the Unix operating system.
+- POSIX emerged out of a need to make applications more portable across diverse systems
+- In the early days of computing, programmers had to rewrite their applications for each computer model and OS.
+
+
+## [What is the meaning of "POSIX"?](https://stackoverflow.com/questions/1780599/what-is-the-meaning-of-posix) <span id="content-6"></span>
+- POSIX is a family of standards, specified by the IEEE, to clarify and make uniform the application programming interfaces (and ancillary issues, such as command line shell utilities) provided by Unix-y operating systems.
+- When you write your programs to rely on POSIX standards, you can be pretty sure to be able to port them easily among a large family of Unix derivatives (including Linux, but not limited to it!); if and when you use some Linux API that's not standardized as part of Posix, you will have a harder time if and when you want to port that program or library to other Unix-y systems (e.g., MacOSX) in the future.
+
+
+## [What is POSIX? Why Does it Matter to Linux/UNIX Users?](https://itsfoss.com/posix/) <span id="content-7"></span>
+
+### What is POSIX?
+- POSIX isn’t actually a thing. It describes a thing – much like a label. Imagine a box labeled: POSIX, and inside the box is a standard. A standard consists of sets of rules and instructions that POSIX is concerned with
+- POSIX is shorthand for Portable Operating System Interface. It is an IEEE 1003.1 standard that defines the language interface between application programs (along with command line shells and utility interfaces) and the UNIX operating system.
+- Compliance to the standard ensures compatibility when UNIX programs are moved from one UNIX platform to another.
+- A standard must be spelled out and followed by rules on how to achieve the goal of interoperability between operating systems.
+
+### Why POSIX?
+- It’s important to note that POSIX wasn’t formed to control how the operating systems were built – any company was free to design their UNIX variant any way they pleased. POSIX was only concerned with how an application interfaces with the operating system.
+- In programmer-speak, an interface is the method one program’s code can communicate with another program. The interface expects Program A to provide a specific type of information to Program B. Likewise, Program A expects Program B to answer back with a specific type of data.
+- Without going into a lot of programmer-speak, I’ll just say that the cat command makes a call to the operating system to fetch the file so cat can read it. cat reads it and then displays the file’s contents on the screen. There is a lot of interplay between the application (cat) and the operating system. How this interplay works is what POSIX was interested in.
+-  If the interplay could be the same across the different UNIX variants, portability – regardless of operating system, manufacturer, and hardware – is regained.
+
+### Compliance is Voluntary
+- When code is compliant, it’s easier to move to another system; very little code rewrite, if any, would be necessary.
+- When code can work on different systems, the use of it expands. People using other systems can benefit from the use of the program.
+- When operating systems and programs conform to the POSIX standard, they gain the benefit of interoperability. They will be able to move from one system to another with the reasonable expectation that the machines will work much like another one does. Their data will still be accessible and they will still be able to make changes to it.
+
+### Conclusion
+- The POSIX standard allows developers to create applications, tools, and platforms on many operating systems using much of the same code.
+- Basically, POSIX is geared toward operating system designers and software developers, but as users of a system
 
 
 **[⬆ back to top](#list-of-contents)**
