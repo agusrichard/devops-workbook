@@ -13,6 +13,8 @@
 ### 8. [What is a Network Socket?](#content-8)
 ### 9. [What is a Socket](#content-9)
 ### 10. [Socket Programming in Computer Network](#content-10)
+### 11. [A quick introduction to processes in Computer Science](#content-11)
+### 12. [Operating System - Processes](#content-12)
 
 <br />
 
@@ -239,6 +241,39 @@
 - TCP Socket Connection:
   ![TCP Socket Connection](https://scaler.com/topics/images/socket-programming-in-tcp.webp)
 
+
+## [A quick introduction to processes in Computer Science](https://medium.com/@imdadahad/a-quick-introduction-to-processes-in-computer-science-271f01c780da) <span id="content-11"></span>
+
+### The basic idea
+- A process is simply a program in execution.
+
+### Monitoring processes in the system
+- At any given time there may be a couple hundred or less processes running. Sometimes it useful to see detailed information about them, especially if your computer is running slow: as certain processes may be hogging the computer’s memory or the CPU.
+
+### How does the operating system manage processes
+- Process:
+  ![Process](https://miro.medium.com/v2/resize:fit:1304/format:webp/1*LdafsmbCdfR882Vtd1Kp0g.jpeg)
+- To do this effectively, the operating system maintains what’s known as a Process Control Block for each process. It contains useful information such as the current process state, the next instruction to perform and currently allocated devices to the process.
+
+
+## [Operating System - Processes](https://www.tutorialspoint.com/operating_system/os_processes.htm) <span id="content-12"></span>
+
+### Process
+- A process is basically a program in execution. The execution of a process must progress in a sequential fashion.
+- A process is defined as an entity which represents the basic unit of work to be implemented in the system.
+
+### Program
+- A program is a piece of code which may be a single line or millions of lines.
+- A computer program is a collection of instructions that performs a specific task when executed by a computer.
+- When we compare a program with a process, we can conclude that a process is a dynamic instance of a computer program.
+
+### Process Life Cycle
+- Diagram:
+  ![Process Life Cycle - Diagram](https://www.tutorialspoint.com/operating_system/images/process_state.jpg)
+
+### Process Control Block (PCB)
+- A Process Control Block is a data structure maintained by the Operating System for every process.
+- The PCB is identified by an integer process ID (PID). A PCB keeps all the information needed to keep track of a process as listed below in the table
 
 **[⬆ back to top](#list-of-contents)**
 
