@@ -16,6 +16,11 @@
 ### 11. [A quick introduction to processes in Computer Science](#content-11)
 ### 12. [Operating System - Processes](#content-12)
 ### 13. [I/O Hardware](#content-13)
+### 14. [Virtualization](#content-14)
+### 15. [What is virtualization?](#content-15)
+### 16. [Containers vs. virtual machines](#content-16)
+### 17. [File System](#content-17)
+### 18. [Demystifying memory management in modern programming languages](#content-18)
 
 <br />
 
@@ -277,14 +282,14 @@
 - The PCB is identified by an integer process ID (PID). A PCB keeps all the information needed to keep track of a process as listed below in the table
 
 
-## [I/O Hardware](https://www.tutorialspoint.com/operating_system/os_io_hardware.htm) <span id="content-12"></span>
+## [I/O Hardware](https://www.tutorialspoint.com/operating_system/os_io_hardware.htm) <span id="content-13"></span>
 - Block devices − A block device is one with which the driver communicates by sending entire blocks of data. For example, Hard disks, USB cameras, Disk-On-Key etc.
 - Character devices − A character device is one with which the driver communicates by sending and receiving single characters (bytes, octets). For example, serial ports, parallel ports, sounds cards etc
 - Synchronous I/O − In this scheme CPU execution waits while I/O proceeds
 - Asynchronous I/O − I/O proceeds concurrently with CPU execution
 
 
-## [Virtualization](https://www.techtarget.com/searchitoperations/definition/virtualization) <span id="content-13"></span>
+## [Virtualization](https://www.techtarget.com/searchitoperations/definition/virtualization) <span id="content-14"></span>
 
 ### What is virtualization?
 - Virtualization is the creation of a virtual -- rather than actual -- version of something, such as an operating system (OS), a server, a storage device or network resources.
@@ -320,7 +325,7 @@
   - Desktop virtualization is virtualizing a workstation load rather than a server. This allows the user to access the desktop remotely, typically using a thin client at the desk. Since the workstation is essentially running in a data center server, access to it can be both more secure and portable. The operating system license does still need to be accounted for as well as the infrastructure.
   - Application virtualization is abstracting the application layer away from the operating system. This way, the application can run in an encapsulated form without being depended upon on by the operating system underneath. This can allow a Windows application to run on Linux and vice versa, in addition to adding a level of isolation.
 
-## [What is virtualization?](https://opensource.com/resources/virtualization) <span id="content-14"></span>
+## [What is virtualization?](https://opensource.com/resources/virtualization) <span id="content-15"></span>
 - A hypervisor is a program for creating and running virtual machines.
 - Type one, or "bare metal" hypervisors that run guest virtual machines directly on a system's hardware, essentially behaving as an operating system
 - Type two, or "hosted" hypervisors behave more like traditional applications that can be started and stopped like a normal program.
@@ -329,7 +334,7 @@
 - Typically, containers are designed to run a single program, as opposed to emulating a full multi-purpose server.
 
 
-## [Containers vs. virtual machines](https://www.atlassian.com/microservices/cloud-computing/containers-vs-vms) <span id="content-15"></span>
+## [Containers vs. virtual machines](https://www.atlassian.com/microservices/cloud-computing/containers-vs-vms) <span id="content-16"></span>
 - Virtualization is the process in which a system singular resource like RAM, CPU, Disk, or Networking can be ‘virtualized’ and represented as multiple resources.
 - The key differentiator between containers and virtual machines is that virtual machines virtualize an entire machine down to the hardware layers and containers only virtualize software layers above the operating system level.
 - Image:
@@ -356,7 +361,77 @@
 - Cons
   - Iteration speed
   - Storage size cost
-  - 
+
+
+## [File System](https://www.tutorialspoint.com/operating_system/os_file_system.htm) <span id="content-17"></span>
+- A file is a named collection of related information that is recorded on secondary storage such as magnetic disks, magnetic tapes and optical disks. In general, a file is a sequence of bits, bytes, lines or records whose meaning is defined by the files creator and user.
+- File type refers to the ability of the operating system to distinguish different types of file such as text files source files and binary files etc.
+- A sequential access is that in which the records are accessed in some sequence, i.e., the information in the file is processed in order, one record after the other. This access method is the most primitive one. Example: Compilers usually access files in this fashion.
+- Direct/Random access
+  - Random access file organization provides, accessing the records directly.
+  - Each record has its own address on the file with by the help of which it can be directly accessed for reading or writing.
+  - The records need not be in any sequence within the file and they need not be in adjacent locations on the storage medium.
+- Indexed sequential access
+  - This mechanism is built up on base of sequential access.
+  - An index is created for each file which contains pointers to various blocks.
+  - Index is searched sequentially and its pointer is used to access the file directly.
+- Space Allocation
+  - Contiguous Allocation
+    - Each file occupies a contiguous address space on disk.
+    - Assigned disk address is in linear order.
+    - Easy to implement.
+    - External fragmentation is a major issue with this type of allocation technique.
+  - Linked Allocation
+    - Each file carries a list of links to disk blocks.
+    - Directory contains link / pointer to first block of a file.
+    - No external fragmentation
+    - Effectively used in sequential access file.
+    - Inefficient in case of direct access file.
+  - Indexed Allocation
+    - Provides solutions to problems of contiguous and linked allocation.
+    - A index block is created having all pointers to files.
+    - Each file has its own index block which stores the addresses of disk space occupied by the file.
+    - Directory contains the addresses of index blocks of files.
+
+
+## [Demystifying memory management in modern programming languages](https://dev.to/deepu105/demystifying-memory-management-in-modern-programming-languages-ddd) <span id="content-18"></span>
+- Memory management is the process of controlling and coordinating the way a software application access computer memory.
+- When a software runs on a target Operating system on a computer it needs access to the computers RAM(Random-access memory) to:
+  - load its own bytecode that needs to be executed
+  - store the data values and data structures used by the program that is executed
+  - load any run-time systems that are required for the program to execute
+- The stack is used for static memory allocation and as the name suggests it is a last in first out(LIFO) stack
+  - Due to this nature, the process of storing and retrieving data from the stack is very fast as there is no lookup required, you just store and retrieve data from the topmost block on it.
+  - But this means any data that is stored on the stack has to be finite and static(The size of the data is known at compile-time).
+  - This is where the execution data of the functions are stored as stack frames(So, this is the actual execution stack). Each frame is a block of space where the data required for that function is stored. For example, every time a function declares a new variable, it is "pushed" onto the topmost block in the stack. Then every time a function exits, the topmost block is cleared, thus all of the variables pushed onto the stack by that function, are cleared. These can be determined at compile time due to the static nature of the data stored here.
+- Multi-threaded applications can have a stack per thread.
+- Memory management of the stack is simple and straightforward and is done by the OS.
+- Typical data that are stored on stack are local variables(value types or primitives, primitive constants), pointers and function frames.
+- This is where you would encounter stack overflow errors as the size of the stack is limited compared to the Heap.
+- There is a limit on the size of value that can be stored on the Stack for most languages.
+- Heap is used for dynamic memory allocation and unlike stack, the program needs to look up the data in heap using pointers
+  - It is slower than stack as the process of looking up data is more involved but it can store more data than the stack.
+  - This means data with dynamic size can be stored here.
+  - Heap is shared among threads of an application.
+  - Due to its dynamic nature heap is trickier to manage and this is where most of the memory management issues arise from and this is where the automatic memory management solutions from the language kick in.
+  - Typical data that are stored on the heap are global variables, reference types like objects, strings, maps, and other complex data structures.
+  - This is where you would encounter out of memory errors if your application tries to use more memory than the allocated heap(Though there are many other factors at play here like GC, compacting).
+  - Generally, there is no limit on the size of the value that can be stored on the heap. Of course, there is the upper limit of how much memory is allocated to the application.
+- Unlike Hard disk drives, RAM is not infinite. If a program keeps on consuming memory without freeing it, ultimately it will run out of memory and crash itself or even worse crash the operating system.
+- Manual memory management
+  - For example, C and C++.
+- Garbage collection(GC)
+  - JVM(Java/Scala/Groovy/Kotlin), JavaScript, C#, Golang, OCaml, and Ruby are some of the languages that use Garbage collection for memory management by default.
+  - Mark & Sweep GC: Also known as Tracing GC. Its generally a two-phase algorithm that first marks objects that are still being referenced as "alive" and in the next phase frees the memory of objects that are not alive. JVM, C#, Ruby, JavaScript, and Golang employ this approach for example. In JVM there are different GC algorithms to choose from while JavaScript engines like V8 use a Mark & Sweep GC along with Reference counting GC to complement it. This kind of GC is also available for C & C++ as an external library.
+    ![Process of Garbage Collection](https://res.cloudinary.com/practicaldev/image/fetch/s--JxvXuUl1--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_66%2Cw_880/https://i.imgur.com/AZaR0LP.gif)
+  - Reference counting GC: In this approach, every object gets a reference count which is incremented or decremented as references to it change and garbage collection is done when the count becomes zero. It's not very preferred as it cannot handle cyclic references. PHP, Perl, and Python, for example, uses this type of GC with workarounds to overcome cyclic references. This type of GC can be enabled for C++ as well.
+- Resource Acquisition is Initialization (RAII)
+  - In this type of memory management, an object's memory allocation is tied to its lifetime, which is from construction until destruction. It was introduced in C++ and is also used by Ada and Rust.
+  - Automatic Reference Counting(ARC)
+    - It's similar to Reference counting GC but instead of running a runtime process at a specific interval the retain and release instructions are inserted to the compiled code at compile-time and when an object reference becomes zero its cleared automatically as part of execution without any program pause. It also cannot handle cyclic references and relies on the developer to handle that by using certain keywords. Its a feature of the Clang compiler and provides ARC for Objective C & Swift.
+  - Ownership
+    - It combines RAII with an ownership model, any value must have a variable as its owner(and only one owner at a time) when the owner goes out of scope the value will be dropped freeing the memory regardless of it being in stack or heap memory. It is kind of like Compile-time reference counting. It is used by Rust, in my research I couldn't find any other language using this exact mechanism.
+
 
 
 **[⬆ back to top](#list-of-contents)**
