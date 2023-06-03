@@ -21,6 +21,7 @@
 ### 16. [Containers vs. virtual machines](#content-16)
 ### 17. [File System](#content-17)
 ### 18. [Demystifying memory management in modern programming languages](#content-18)
+### 19. [Operating System: Threads and Concurrency](#content-19)
 
 <br />
 
@@ -431,6 +432,39 @@
     - It's similar to Reference counting GC but instead of running a runtime process at a specific interval the retain and release instructions are inserted to the compiled code at compile-time and when an object reference becomes zero its cleared automatically as part of execution without any program pause. It also cannot handle cyclic references and relies on the developer to handle that by using certain keywords. Its a feature of the Clang compiler and provides ARC for Objective C & Swift.
   - Ownership
     - It combines RAII with an ownership model, any value must have a variable as its owner(and only one owner at a time) when the owner goes out of scope the value will be dropped freeing the memory regardless of it being in stack or heap memory. It is kind of like Compile-time reference counting. It is used by Rust, in my research I couldn't find any other language using this exact mechanism.
+
+
+## [Operating System: Threads and Concurrency](https://medium.com/@akhandmishra/operating-system-threads-and-concurrency-aec2036b90f8) <span id="content-19"></span>
+
+### Introduction
+- Definition: A Thread also called lightweight process, is basic CPU utilization; it compromises a thread ID, a program counter, a register set, and a stack. A thread is an entity within a process that can be scheduled for execution.
+- If we want a process to be able to execute on multiple CPUs at a time, to take advantage of the multi-core systems, the process must have several execution-context called threads.
+- A thread is an active entity which executes a part of a process.
+-  Multiple threads execute simultaneously with each other which results in the execution of a single whole process. 
+- The threads of a process are the part of the same virtual address space (i.e. they share all virtual to physical mapping), they share all the data, code and file.
+- However, they will be executing the different instruction, they will be accessing the different portion of the address space or different in other ways.
+- A different thread has a different stack, a different stack pointer register, a different Program Counter, and other registers.
+- PCB: Single-threaded and multi-threaded process
+  ![PCB: Single-threaded and multi-threaded process](https://miro.medium.com/v2/resize:fit:1280/format:webp/0*cgAbgEkofShV4B5z.png)
+
+### Benefits of Multi-threading
+- Parallelization: In multi-processor architecture, different threads can execute different instructions at a time, which result in parallelization which speeds up the execution of the process.
+- Specialization: By specializing different threads to perform the different task, we can manage threads, for example, we can give higher priority to those threads which are executing the more important task. Also in multi-processor architecture specialization leads to the hotter cache which improves performance.
+- Efficient: Multi-threaded programs are more efficient as compared to multi-process programs in terms of resource requirement as threads share address space while process does not, so multi-process programs will require separate memory space allocation. Also, Multi-threaded programs incur lower overhead as inter-thread communication is less expensive.
+- Hide Latency: As context switching among the process is a costly operation, as all the threads of a process share the same virtual to physical address mapping and other resources, context switch among the thread is a cheap operation and require less time. When the number of thread is greater than the number of CPU and a thread is in idle state (spending the time to wait for the result of some interrupt) and its idle time is greater than two times the time required for switching the context to another thread, it will switch the switch context to another thread to hide idling time.
+
+### Synchronisation Mechanisms:
+- To deal with concurrency issues a mechanism is needed to execute threads in an exclusive manner to ensure threads access data and other resources one at a time, for this, we use a mutex which is nothing but mutual exclusion object which allows multiple threads to share resources like file access or memory access, but not simultaneously.
+- A waiting mechanism is also needed for threads which are waiting for other threads to complete, specifying what are they waiting for so that they are not required to keeps on checking whether they are allowed to execute the operation or not, they will be notified whenever they are allowed. This type of inter-thread coordination is generally handled by condition variable.
+
+### Thread and Thread Creation
+- A thread data structure contains information about thread identity, register values like program counter, stack pointer, etc, stack and other attributes which help thread management system to manage threads like scheduling threads, debugging threads, etc.
+- A mutex is like a lock which is used whenever the thread is accessing the data or resources that are shared among different threads.
+- When a thread locks a mutex it has exclusive access to the shared resources. Other threads attempting to lock the mutex (as other threads may also need to perform operations that require exclusive access to shared resources) are not going to succeed and have to wait till the thread which has locked the mutex (i.e. the owner thread) completes its task.
+- The data structure of mutex at least contains information about its lock status (whether the mutex is locked or not), list of all the blocked threads which are waiting for the mutex to be free, i.e. the owner thread to complete its work.
+- The portion of the code performed by the thread under the locked state of the mutex is called critical section.
+- The critical section contains the code which performs the operations which require only one thread at a time to perform. 
+- When the owner thread exits the critical section it releases the mutex and other waiting thread can lock it for their exclusive access to shared resources.
 
 
 
