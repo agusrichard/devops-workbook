@@ -15,6 +15,7 @@
 ### 10. [Socket Programming in Computer Network](#content-10)
 ### 11. [A quick introduction to processes in Computer Science](#content-11)
 ### 12. [Operating System - Processes](#content-12)
+### 13. [I/O Hardware](#content-13)
 
 <br />
 
@@ -274,6 +275,89 @@
 ### Process Control Block (PCB)
 - A Process Control Block is a data structure maintained by the Operating System for every process.
 - The PCB is identified by an integer process ID (PID). A PCB keeps all the information needed to keep track of a process as listed below in the table
+
+
+## [I/O Hardware](https://www.tutorialspoint.com/operating_system/os_io_hardware.htm) <span id="content-12"></span>
+- Block devices − A block device is one with which the driver communicates by sending entire blocks of data. For example, Hard disks, USB cameras, Disk-On-Key etc.
+- Character devices − A character device is one with which the driver communicates by sending and receiving single characters (bytes, octets). For example, serial ports, parallel ports, sounds cards etc
+- Synchronous I/O − In this scheme CPU execution waits while I/O proceeds
+- Asynchronous I/O − I/O proceeds concurrently with CPU execution
+
+
+## [Virtualization](https://www.techtarget.com/searchitoperations/definition/virtualization) <span id="content-13"></span>
+
+### What is virtualization?
+- Virtualization is the creation of a virtual -- rather than actual -- version of something, such as an operating system (OS), a server, a storage device or network resources.
+- Virtualization uses software that simulates hardware functionality to create a virtual system.
+- OS virtualization is the use of software to allow a piece of hardware to run multiple operating system images at the same time.
+
+### How virtualization works
+- A key use of virtualization technology is server virtualization, which uses a software layer -- called a hypervisor
+- Hypervisors take the physical resources and separate them so they can be utilized by the virtual environment.
+- They can sit on top of an OS or they can be directly installed onto the hardware. The latter is how most enterprises virtualize their systems.
+- The Xen hypervisor is an open source software program that is responsible for managing the low-level interactions that occur between virtual machines (VMs) and the physical hardware.
+- In other words, the Xen hypervisor enables the simultaneous creation, execution and management of various virtual machines in one physical environment.
+- With the help of the hypervisor, the guest OS, normally interacting with true hardware, is now doing so with a software emulation of that hardware; often, the guest OS has no idea it's on virtualized hardware.
+- Traditional and virtual architecture:
+  ![Traditional and virtual architecture](https://cdn.ttgtmedia.com/rms/onlineImages/server_virtualization-traditional_virtual_architecture.jpg)
+- The virtualization process follows the steps listed below:
+  - Hypervisors detach the physical resources from their physical environments.
+  - Resources are taken and divided, as needed, from the physical environment to the various virtual environments.
+  - System users work with and perform computations within the virtual environment.
+  - Once the virtual environment is running, a user or program can send an instruction that requires extra resources form the physical environment. In response, the hypervisor relays the message to the physical system and stores the changes. This process will happen at an almost native speed.
+- The VM acts like a single data file that can be transferred from one computer to another and opened in both; it is expected to perform the same way on every computer.
+
+### Types of virtualization
+- A partition is the logical division of a hard disk drive to create, in effect, two separate hard drives.
+- There are six areas of IT where virtualization is making headway:
+  - Network virtualization is a method of combining the available resources in a network by splitting up the available bandwidth into channels, each of which is independent from the others and can be assigned -- or reassigned -- to a particular server or device in real time. The idea is that virtualization disguises the true complexity of the network by separating it into manageable parts, much like your partitioned hard drive makes it easier to manage your files.
+  - Storage virtualization is the pooling of physical storage from multiple network storage devices into what appears to be a single storage device that is managed from a central console. Storage virtualization is commonly used in storage area networks.
+  - Server virtualization is the masking of server resources -- including the number and identity of individual physical servers, processors and operating systems -- from server users. The intention is to spare the user from having to understand and manage complicated details of server resources while increasing resource sharing and utilization and maintaining the capacity to expand later.
+    - The layer of software that enables this abstraction is often referred to as the hypervisor.
+    - The most common hypervisor -- Type 1 -- is designed to sit directly on bare metal and provide the ability to virtualize the hardware platform for use by the virtual machines.
+    -  KVM virtualization is a Linux kernel-based virtualization hypervisor that provides Type 1 virtualization benefits like other hypervisors. KVM is licensed under open source. A Type 2 hypervisor requires a host operating system and is more often used for testing and labs.
+  - Data virtualization is abstracting the traditional technical details of data and data management, such as location, performance or format, in favor of broader access and more resiliency tied to business needs.
+  - Desktop virtualization is virtualizing a workstation load rather than a server. This allows the user to access the desktop remotely, typically using a thin client at the desk. Since the workstation is essentially running in a data center server, access to it can be both more secure and portable. The operating system license does still need to be accounted for as well as the infrastructure.
+  - Application virtualization is abstracting the application layer away from the operating system. This way, the application can run in an encapsulated form without being depended upon on by the operating system underneath. This can allow a Windows application to run on Linux and vice versa, in addition to adding a level of isolation.
+
+## [What is virtualization?](https://opensource.com/resources/virtualization) <span id="content-14"></span>
+- A hypervisor is a program for creating and running virtual machines.
+- Type one, or "bare metal" hypervisors that run guest virtual machines directly on a system's hardware, essentially behaving as an operating system
+- Type two, or "hosted" hypervisors behave more like traditional applications that can be started and stopped like a normal program.
+- A virtual machine is the emulated equivalent of a computer system that runs on top of another system.
+- A container is actually just an isolated process that shared the same Linux kernel as the host operating system, as well as the libraries and other files needed for the execution of the program running inside of the container
+- Typically, containers are designed to run a single program, as opposed to emulating a full multi-purpose server.
+
+
+## [Containers vs. virtual machines](https://www.atlassian.com/microservices/cloud-computing/containers-vs-vms) <span id="content-15"></span>
+- Virtualization is the process in which a system singular resource like RAM, CPU, Disk, or Networking can be ‘virtualized’ and represented as multiple resources.
+- The key differentiator between containers and virtual machines is that virtual machines virtualize an entire machine down to the hardware layers and containers only virtualize software layers above the operating system level.
+- Image:
+  ![Image](https://wac-cdn.atlassian.com/dam/jcr:92adde69-f728-4cfc-8bab-ba391c25ae58/SWTM-2060_Diagram_Containers_VirtualMachines_v03.png?cdnVersion=1040)
+
+### What is a container?
+- Containers are lightweight software packages that contain all the dependencies required to execute the contained software application. These dependencies include things like system libraries, external third-party code packages, and other operating system level applications.
+- Pros
+  - Iteration speed
+    - Because containers are lightweight and only include high level software, they are very fast to modify and iterate on.
+  - Robust ecosystem
+    - Most container runtime systems offer a hosted public repository of pre-made containers. These container repositories contain many popular software applications like databases or messaging systems and can be instantly downloaded and executed, saving time for development teams
+- Cons
+  - Shared host exploits
+    - Containers all share the same underlying hardware system below the operating system layer, it is possible that an exploit in one container could break out of the container and affect the shared hardware. Most popular container runtimes have public repositories of pre-built containers. There is a security risk in using one of these public images as they may contain exploits or may be vulnerable to being hijacked by nefarious actors.
+ 
+### What is a virtual machine?
+- Virtual machines are heavy software packages that provide complete emulation of low level hardware devices like CPU, Disk and Networking devices
+- Pros
+  - Full isolation security
+    - Virtual machines run in isolation as  a fully standalone system.
+  - Interactive development
+    - Virtual machines are more dynamic and can be interactively developed. Once the basic hardware definition is specified for a virtual machine the virtual machine can then be treated as a bare bones computer.
+- Cons
+  - Iteration speed
+  - Storage size cost
+  - 
+
 
 **[⬆ back to top](#list-of-contents)**
 
