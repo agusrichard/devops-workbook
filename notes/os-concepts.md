@@ -22,6 +22,8 @@
 ### 17. [File System](#content-17)
 ### 18. [Demystifying memory management in modern programming languages](#content-18)
 ### 19. [Operating System: Threads and Concurrency](#content-19)
+### 20. [What is init.d in Linux Service Management](#content-20)
+### 21. [An Ultimate Guide of How to Manage Linux Systemd Services With Systemctl Command](#content-21)
 
 <br />
 
@@ -466,6 +468,106 @@
 - The critical section contains the code which performs the operations which require only one thread at a time to perform. 
 - When the owner thread exits the critical section it releases the mutex and other waiting thread can lock it for their exclusive access to shared resources.
 
+
+## [What is init.d in Linux Service Management?](https://www.geeksforgeeks.org/what-is-init-d-in-linux-service-management/) <span id="content-20"></span>
+
+### Introduction
+- In Linux there are several services that can be started and stopped manually in the system, some of their services are ssh, HTTP, tor,
+  ```shell
+  service ssh start
+  ```
+- Check status:
+  ```shell
+  service ssh status
+  ```
+
+### What is init.d?
+- All these service works on several scripts and these scripts are stored in /etc/init.d location, this init.d is a daemon which is the first process of the Linux system.
+- Then other processes, services, daemons, and threads are started by init.
+- So init.d is a configuration database for the init process.
+- Now let’s check some daemon scripts by printing some processes, a daemon script holds functions like start, stop, status, and restart. Let’s check ssh as an example. 
+  ```shell
+  cat /etc/init.d/ssh
+  ```
+  
+### How to Use init.d in Service Management?
+- Another way of running `service ssh start`
+  ```shell
+  /etc/init.d/ssh start
+
+  /etc/init.d/ssh stop
+  ```
+
+## [An Ultimate Guide of How to Manage Linux Systemd Services With Systemctl Command](https://www.cherryservers.com/blog/an-ultimate-guide-of-how-to-manage-linux-systemd-services-with-systemctl-command) <span id="content-21"></span>
+- Systemd is the default service manager that provides core functionality for many modern Linux distros, and systemctl is how users can interface with systemd services.
+
+### What Is Systemd?
+- Systemd is a suite of tools that manages key aspects of Linux systems including services, network configuration, runtime settings, and logging.
+- Systemd is sometimes called a "system and service manager" for Linux distros.
+- One of the most important functions of systemd is acting as an init system. The init system is the first process started after the Linux kernel boots and always uses a process ID (PID) of 1.
+
+### What Is The Linux Systemctl Command?
+- The Linux sytemctl command allows you to view and control the systemd init system and services.
+- In many ways, the Linux systemctl command acts as an interface to systemd. For example, you can use systemctl to perform administrative tasks like:
+  - Starting/stopping services
+  - Enabling/disabling services
+  - Viewing a service's status
+  - Checking a service's dependencies
+
+### How To Manage Systemd Services With Systemctl Command
+- Check The Status Of A Service With The Linux Systemctl Command
+  ```shell
+  systemctl status <servicename>
+
+  systemctl status ufw
+  ```
+- Show Properties Of a Service With The Linux Systemctl Command
+  ```shell
+  systemctl show <servicename>
+  ```
+- Start stop, and restart a service
+  ```shell
+  systemctl start <servicename>
+
+  systemctl stop <servicename>
+  
+  systemctl restart <servicename>
+  ```
+- To "reload" a service — which means to make it reread configuration files without restarting — the general systemctl command syntax is 
+  ```shell
+  systemctl reload <servicename>
+  ```
+- If a service doesn't support reloading, use this command:
+  ```shell
+  systemctl reload-or-restart <servicename>
+  ```
+- For a service to automatically start whenever the system starts, it should be enabled. The basic systemctl command syntax for enabling a service is:
+  ```shell
+  systemctl enable <servicename>
+  ```
+- If a service currently starts when the system starts and you want to disable that behavior, you can use:
+  ```shell
+  systemctl disable <servicename> 
+  ```
+- Disabled services can still be manually started. Masking a service disables it and disallows a user or process from starting it without first unmasking it.
+  ```shell
+  systemctl mask <servicename> 
+  
+  // unmask
+  systemctl umask <servicename>
+  ```
+  
+### Systemd Unit Management
+- Systemd units are the target of most systemctl commands. Units are plaintext files that describe a resource like a service, socket, device, or filesystem mount point. Systemd services are defined in unit files that end in .service. For example, the sshd's unit file is sshd.service and RSYSLOG's unit file is syslog.service.
+- To list all the loaded units on a system, run the command systemctl or systemctl list-units (both commands do the same thing).
+- You can view the other units a service depends on with this general systemctl command syntax:
+  ```shell
+  systemctl list-dependencies <servicename>
+  ```
+- The systemctl cat command displays the unit files systemd is actively using. This information can be useful to help determine if changes to a unit file are loaded to the system.
+  ```shell
+  systemctl list-dependencies <servicename>
+  ```
 
 
 **[⬆ back to top](#list-of-contents)**
