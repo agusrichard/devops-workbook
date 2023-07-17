@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mongo-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - host: syarifah.com
+    http:
+      paths:
+      - path: /
+        pathType: Exact  
+        backend:
+          service:
+            name: mongo-express-service
+            port: 
+              number: 8081
+
