@@ -20,6 +20,7 @@
   - Initialize - Install the plugins Terraform needs to manage the infrastructure.
   - Plan - Preview the changes Terraform will make to match your configuration.
   - Apply - Make the planned changes.
+  Commands
 
 
 **[⬆ back to top](#list-of-contents)**
