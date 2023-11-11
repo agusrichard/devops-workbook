@@ -5,6 +5,7 @@
 ## List of Contents:
 
 ### 1. [What is Infrastructure as Code with Terraform?](#content-1)
+### 2. [Install Terraform](#content-2)
 
 <br />
 
@@ -22,6 +23,18 @@
   - Apply - Make the planned changes.
   Commands
 
+## [Install Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) <span id="content-2"></span>
+
+### Install
+- Using Homebrew
+  - brew tap hashicorp/tap
+  - brew install hashicorp/tap/terraform
+  - brew update
+  - brew upgrade hashicorp/tap/terraform
+
+### Verify Installation
+- terraform -help
+- terraform -help plan
 
 **[⬆ back to top](#list-of-contents)**
 
