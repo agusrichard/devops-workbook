@@ -6,6 +6,7 @@
 
 ### 1. [What is Infrastructure as Code with Terraform?](#content-1)
 ### 2. [Install Terraform](#content-2)
+### 3. [Build Infrastructure](#content-3)
 
 <br />
 
@@ -35,6 +36,10 @@
 ### Verify Installation
 - terraform -help
 - terraform -help plan
+
+## [Build Infrastructure](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/aws-build) <span id="content-3"></span>
+
+
 
 **[⬆ back to top](#list-of-contents)**
 
