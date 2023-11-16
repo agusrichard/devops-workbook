@@ -7,6 +7,8 @@
 ### 1. [What is Infrastructure as Code with Terraform?](#content-1)
 ### 2. [Install Terraform](#content-2)
 ### 3. [Build Infrastructure](#content-3)
+### 4. [Change Infrastructure](#content-4)
+### 5. [Destroy Infrastructure](#content-5)
 
 <br />
 
@@ -101,6 +103,28 @@
 - The Terraform state file is the only way Terraform can track which resources it manages, and often contains sensitive information, so you must store your state file securely and restrict access to only trusted team members who need to manage your infrastructure.
 - In production, we recommend storing your state remotely with Terraform Cloud or Terraform Enterprise. Terraform also supports several other remote backends you can use to store and manage your state.
 - Inspect the current state using `terraform show`
+
+
+## [Change Infrastructure](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/aws-change) <span id="content-4"></span>
+
+### Configuration
+- Now update the ami of your instance. Change the aws_instance.app_server resource under the provider block in main.tf by replacing the current AMI ID with a new one.
+
+### Apply Changes
+- After changing the configuration, run terraform apply again to see how Terraform will apply this change to the existing resources.
+- The prefix -/+ means that Terraform will destroy and recreate the resource, rather than updating it in-place.
+- Terraform can update some attributes in-place (indicated with the ~ prefix), but changing the AMI for an EC2 instance requires recreating it. Terraform handles these details for you, and the execution plan displays what Terraform will do.
+- Additionally, the execution plan shows that the AMI change is what forces Terraform to replace the instance. Using this information, you can adjust your changes to avoid destructive updates if necessary.
+
+
+## [Destroy Infrastructure](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/aws-destroy) <span id="content-5"></span>
+
+### Destroy
+- The terraform destroy command terminates resources managed by your Terraform project.
+- This command is the inverse of terraform apply in that it terminates all the resources specified in your Terraform state. It does not destroy resources running elsewhere that are not managed by the current Terraform project.
+- Run `terraform destroy`
+- The - prefix indicates that the instance will be destroyed. As with apply, Terraform shows its execution plan and waits for approval before making any changes.
+- Just like with apply, Terraform determines the order to destroy your resources. In this case, Terraform identified a single instance with no other dependencies, so it destroyed the instance. In more complicated cases with multiple resources, Terraform will destroy them in a suitable order to respect dependencies.
 
 
 **[⬆ back to top](#list-of-contents)**
