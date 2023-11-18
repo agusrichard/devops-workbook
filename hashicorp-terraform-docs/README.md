@@ -10,6 +10,7 @@
 ### 4. [Change Infrastructure](#content-4)
 ### 5. [Destroy Infrastructure](#content-5)
 ### 6. [Define Input Variables](#content-6)
+### 7. [Query Data with Outputs](#content-7)
 
 <br />
 
@@ -157,6 +158,31 @@
 - Now apply the configuration again, this time overriding the default instance name by passing in a variable using the -var flag. Terraform will update the instance's Name tag with the new name. Respond to the confirmation prompt with yes.
   ```shell
   terraform apply -var "instance_name=YetAnotherName"
+  ```
+
+## [Query Data with Outputs](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/aws-outputs) <span id="content-7"></span>
+
+### Output EC2 instance configuration
+- Create a file called outputs.tf and add the configuration below:
+  ```text
+  output "instance_id" {
+    description = "ID of the EC2 instance"
+    value       = aws_instance.app_server.id
+  }
+
+  output "instance_public_ip" {
+    description = "Public IP address of the EC2 instance"
+    value       = aws_instance.app_server.public_ip
+  }
+  ```
+
+### Inspect output values
+- You must apply this configuration before you can use these output values.
+- Terraform prints output values to the screen when you apply your configuration. Query the outputs with the terraform output command.
+  ```text
+  terraform output
+  instance_id = "i-0bf954919ed765de1"
+  instance_public_ip = "54.186.202.254"
   ```
 
 
