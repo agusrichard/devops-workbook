@@ -9,6 +9,7 @@
 ### 3. [Build Infrastructure](#content-3)
 ### 4. [Change Infrastructure](#content-4)
 ### 5. [Destroy Infrastructure](#content-5)
+### 6. [Define Input Variables](#content-6)
 
 <br />
 
@@ -125,6 +126,38 @@
 - Run `terraform destroy`
 - The - prefix indicates that the instance will be destroyed. As with apply, Terraform shows its execution plan and waits for approval before making any changes.
 - Just like with apply, Terraform determines the order to destroy your resources. In this case, Terraform identified a single instance with no other dependencies, so it destroyed the instance. In more complicated cases with multiple resources, Terraform will destroy them in a suitable order to respect dependencies.
+
+## [Define Input Variables](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/aws-variables) <span id="content-6"></span>
+
+### Set the instance name with a variable
+- The current configuration includes a number of hard-coded values. Terraform variables allow you to write configuration that is flexible and easier to re-use.
+- Create a new file called variables.tf with a block defining a new instance_name variable.
+  ```text
+  variable "instance_name" {
+    description = "Value of the Name tag for the EC2 instance"
+    type        = string
+    default     = "ExampleAppServerInstance"
+  }
+  ```
+- In main.tf, update the aws_instance resource block to use the new variable. The instance_name variable block will default to its default value ("ExampleAppServerInstance") unless you declare a different value.
+  ```text
+  resource "aws_instance" "app_server" {
+     ami           = "ami-08d70e59c07c61a3a"
+     instance_type = "t2.micro"
+
+     tags = {
+  -    Name = "ExampleAppServerInstance"
+  +    Name = var.instance_name
+     }
+   }
+  ```
+  
+### Apply Your Configuration
+- Run `terraform apply`
+- Now apply the configuration again, this time overriding the default instance name by passing in a variable using the -var flag. Terraform will update the instance's Name tag with the new name. Respond to the confirmation prompt with yes.
+  ```shell
+  terraform apply -var "instance_name=YetAnotherName"
+  ```
 
 
 **[⬆ back to top](#list-of-contents)**
